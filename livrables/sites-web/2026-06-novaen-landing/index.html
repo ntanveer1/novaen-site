@@ -227,7 +227,7 @@
     background: radial-gradient(circle at 35% 30%, var(--cyan-bright), var(--violet) 55%, transparent 72%);
     filter: blur(2px);
     box-shadow: 0 0 90px 10px rgba(37, 186, 192, 0.25);
-    animation: float 7s ease-in-out infinite;
+    animation: breathe 4s ease-in-out infinite;
   }
   .hero-visual .ring {
     position: absolute; inset: 14%;
@@ -236,12 +236,42 @@
   }
   .hero-visual .ring.r2 { inset: 26%; border-color: rgba(255,255,255,0.08); }
   .hero-visual .ring.r3 { inset: 38%; border-color: rgba(37, 186, 192, 0.16); }
-  @keyframes float {
-    0%, 100% { transform: translate(-50%, -50%); }
-    50% { transform: translate(-50%, -58%); }
+  @keyframes breathe {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 90px 10px rgba(37, 186, 192, 0.25); }
+    50% { transform: translate(-50%, -50%) scale(1.1); box-shadow: 0 0 120px 24px rgba(37, 186, 192, 0.38); }
   }
   @media (prefers-reduced-motion: reduce) {
     .hero-visual .orb { animation: none; }
+  }
+
+  /* Curseur personnalisé — uniquement sur écran avec souris */
+  @media (pointer: fine) {
+    body, a, button, input, textarea, select { cursor: none; }
+    .cursor-dot {
+      position: fixed;
+      width: 7px; height: 7px;
+      background: var(--cyan-bright);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      top: 0; left: 0;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 8px 2px rgba(67, 224, 230, 0.6);
+      transition: width 0.2s, height 0.2s, background 0.2s;
+    }
+    .cursor-ring {
+      position: fixed;
+      width: 30px; height: 30px;
+      border: 1.5px solid rgba(37, 186, 192, 0.5);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      top: 0; left: 0;
+      transform: translate(-50%, -50%);
+      transition: width 0.25s ease, height 0.25s ease, border-color 0.25s ease;
+    }
+    .cursor-dot.hover { width: 10px; height: 10px; }
+    .cursor-ring.hover { width: 46px; height: 46px; border-color: rgba(67, 224, 230, 0.75); }
   }
 
   /* Section scaffolding */
@@ -465,6 +495,9 @@
 </head>
 <body>
 
+<div class="cursor-dot" id="cursor-dot"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+
 <header class="site">
   <nav class="nav wrap" aria-label="Navigation principale">
     <a class="brand" href="#top" aria-label="NOVAËN, accueil"><img src="assets/novaen-logo-color.svg" alt="NOVAËN — From Spark To The Star"></a>
@@ -668,6 +701,34 @@
 </footer>
 
 <script>
+  // Curseur personnalisé
+  if (window.matchMedia('(pointer: fine)').matches) {
+    var dot = document.getElementById('cursor-dot');
+    var ring = document.getElementById('cursor-ring');
+    var mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+
+    document.addEventListener('mousemove', function(e) {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      dot.style.left = mouseX + 'px';
+      dot.style.top = mouseY + 'px';
+    });
+
+    (function animateRing() {
+      ringX += (mouseX - ringX) * 0.13;
+      ringY += (mouseY - ringY) * 0.13;
+      ring.style.left = ringX + 'px';
+      ring.style.top = ringY + 'px';
+      requestAnimationFrame(animateRing);
+    })();
+
+    document.querySelectorAll('a, button, input, textarea, select').forEach(function(el) {
+      el.addEventListener('mouseenter', function() { dot.classList.add('hover'); ring.classList.add('hover'); });
+      el.addEventListener('mouseleave', function() { dot.classList.remove('hover'); ring.classList.remove('hover'); });
+    });
+  }
+
+  // Formulaire de contact
   document.getElementById('contact-form').addEventListener('submit', function(e) {
     e.preventDefault();
     var form = e.target;
