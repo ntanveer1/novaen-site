@@ -376,6 +376,76 @@
     color: var(--ink-mute); font-size: 0.85rem;
   }
 
+  /* Contact form */
+  .form-contact {
+    max-width: 560px;
+    margin: 2.6rem auto 0;
+    text-align: left;
+  }
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    margin-bottom: 1.3rem;
+  }
+  .field label {
+    font-family: var(--font-display);
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--ink-soft);
+    letter-spacing: 0.03em;
+  }
+  .field input,
+  .field textarea {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 0.85rem 1.1rem;
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s ease, background 0.2s ease;
+    width: 100%;
+  }
+  .field input::placeholder,
+  .field textarea::placeholder { color: var(--ink-mute); }
+  .field input:focus,
+  .field textarea:focus {
+    border-color: var(--cyan);
+    background: rgba(37, 186, 192, 0.04);
+  }
+  .field textarea { min-height: 130px; resize: vertical; }
+  .field select {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 0.85rem 2.5rem 0.85rem 1.1rem;
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s ease, background 0.2s ease;
+    width: 100%;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%237e9596' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+  }
+  .field select:focus { border-color: var(--cyan); background-color: rgba(37, 186, 192, 0.04); }
+  .field select option { background: #0e2b31; color: var(--ink); }
+  .form-submit { display: flex; justify-content: center; margin-top: 2rem; }
+  .form-success {
+    display: none;
+    padding: 2rem 1rem;
+    color: var(--cyan-bright);
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 600;
+  }
+
   /* Scroll reveal — progressive enhancement, content visible by default */
   @media (prefers-reduced-motion: no-preference) {
     @supports (animation-timeline: view()) {
@@ -403,7 +473,7 @@
       <a href="#services">Services</a>
       <a href="#pourquoi">Pourquoi nous</a>
     </div>
-    <a class="btn btn-ghost" href="mailto:ctn@novaen.fr?subject=Prise%20de%20contact">Prendre contact</a>
+    <a class="btn btn-ghost" href="#contact">Prendre contact</a>
   </nav>
 </header>
 
@@ -417,7 +487,7 @@
         <h1 id="hero-title">On met l'IA <span class="hl">au travail</span> dans votre entreprise.</h1>
         <p class="lead">NOVAËN conçoit, installe et fait adopter des solutions d'IA concrètes pour les entreprises B2B. Pas une démo de plus — des outils qui tournent dans vos processus, tous les jours.</p>
         <div class="hero-actions">
-          <a class="btn btn-primary" href="mailto:ctn@novaen.fr?subject=Prise%20de%20contact">Prendre contact <span class="arrow" aria-hidden="true">→</span></a>
+          <a class="btn btn-primary" href="#contact">Prendre contact <span class="arrow" aria-hidden="true">→</span></a>
           <a class="btn btn-ghost" href="#services">Voir nos services</a>
         </div>
         <div class="hero-meta">
@@ -523,14 +593,55 @@
     </div>
   </section>
 
-  <!-- CTA FINAL -->
+  <!-- FORMULAIRE DE CONTACT -->
   <section id="contact" aria-labelledby="final-title">
     <div class="wrap reveal">
       <div class="final">
-        <span class="eyebrow">On en parle</span>
-        <h2 id="final-title">Vous avez un projet IA ? <span class="hl">Discutons-en.</span></h2>
-        <p>Un échange simple, sans engagement, pour comprendre où vous en êtes et voir ce qu'on peut construire ensemble.</p>
-        <a class="btn btn-primary" href="mailto:ctn@novaen.fr?subject=Mon%20projet%20IA">Discutons de votre projet <span class="arrow" aria-hidden="true">→</span></a>
+        <span class="eyebrow">Votre projet</span>
+        <h2 id="final-title">On vous répond <span class="hl">sous 24h.</span></h2>
+        <p>Remplissez ce formulaire, on prend le temps de lire votre projet avant de vous répondre.</p>
+
+        <form class="form-contact" id="contact-form" name="contact" method="POST" data-netlify="true">
+          <input type="hidden" name="form-name" value="contact" />
+
+          <div class="field">
+            <label for="nom">Nom et Prénom</label>
+            <input type="text" id="nom" name="nom" placeholder="Jean Dupont" required />
+          </div>
+
+          <div class="field">
+            <label for="societe">Société</label>
+            <input type="text" id="societe" name="societe" placeholder="Nom de votre entreprise" required />
+          </div>
+
+          <div class="field">
+            <label for="contact-info">Email ou téléphone</label>
+            <input type="text" id="contact-info" name="contact_info" placeholder="vous@exemple.com ou +33 6 00 00 00 00" required />
+          </div>
+
+          <div class="field">
+            <label for="service">Quel service vous intéresse ?</label>
+            <select id="service" name="service" required>
+              <option value="" disabled selected>Choisissez un service</option>
+              <option value="Audit IA">Audit IA</option>
+              <option value="Agents IA">Agents IA</option>
+              <option value="Formation / adoption IA">Formation / adoption IA</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="projet">Votre projet</label>
+            <textarea id="projet" name="projet" placeholder="Décrivez votre projet en quelques lignes : contexte, objectif, ce que vous cherchez..." required></textarea>
+          </div>
+
+          <div class="form-submit">
+            <button type="submit" class="btn btn-primary">Envoyer ma demande <span class="arrow" aria-hidden="true">→</span></button>
+          </div>
+        </form>
+
+        <div class="form-success" id="form-success">
+          Merci — on vous répond sous 24h.
+        </div>
       </div>
     </div>
   </section>
@@ -556,5 +667,24 @@
   </div>
 </footer>
 
+<script>
+  document.getElementById('contact-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    var form = e.target;
+    var data = new FormData(form);
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(data).toString()
+    })
+    .then(function() {
+      form.style.display = 'none';
+      document.getElementById('form-success').style.display = 'block';
+    })
+    .catch(function() {
+      alert('Une erreur est survenue. Contactez-nous à ctn@novaen.fr');
+    });
+  });
+</script>
 </body>
 </html>
