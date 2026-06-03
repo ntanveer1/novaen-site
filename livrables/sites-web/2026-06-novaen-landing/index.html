@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOVAËN — Intelligence artificielle pour les entreprises B2B</title>
+<meta name="description" content="NOVAËN aide les entreprises B2B à intégrer l'intelligence artificielle dans leurs opérations : agents IA sur mesure, formation et accompagnement stratégique. Paris.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --violet: #320972;
+    --violet-soft: #4a1a9e;
+    --marine: #0e2b31;
+    --marine-deep: #081e22;
+    --cyan: #25bac0;
+    --cyan-bright: #43e0e6;
+
+    --bg: #07191c;
+    --bg-2: #0a2228;
+    --ink: #f4f8f8;
+    --ink-soft: #b9cbcb;
+    --ink-mute: #7e9596;
+    --line: rgba(37, 186, 192, 0.18);
+    --line-soft: rgba(255, 255, 255, 0.07);
+
+    --font-display: "Space Grotesk", system-ui, sans-serif;
+    --font-body: "Inter", system-ui, sans-serif;
+
+    --maxw: 1200px;
+    --pad-x: clamp(1.25rem, 5vw, 4rem);
+    --section-y: clamp(5rem, 12vh, 9rem);
+    --radius: 18px;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  /* Ambient backdrop */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    background:
+      radial-gradient(60% 50% at 78% -5%, rgba(50, 9, 114, 0.55), transparent 60%),
+      radial-gradient(55% 45% at 8% 12%, rgba(37, 186, 192, 0.12), transparent 55%),
+      linear-gradient(180deg, var(--marine-deep), var(--bg) 40%);
+  }
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image:
+      linear-gradient(var(--line-soft) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(120% 90% at 50% 0%, #000 30%, transparent 78%);
+    -webkit-mask-image: radial-gradient(120% 90% at 50% 0%, #000 30%, transparent 78%);
+    opacity: 0.6;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  .wrap {
+    width: 100%;
+    max-width: var(--maxw);
+    margin-inline: auto;
+    padding-inline: var(--pad-x);
+  }
+
+  /* Type */
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin: 0;
+    text-wrap: balance;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--cyan);
+  }
+  .eyebrow::before {
+    content: "";
+    width: 26px;
+    height: 1px;
+    background: var(--cyan);
+    opacity: 0.7;
+  }
+
+  .lead { color: var(--ink-soft); max-width: 56ch; }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: 0.01em;
+    padding: 0.95rem 1.7rem;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+  }
+  .btn .arrow { transition: transform 0.25s ease; }
+  .btn:hover .arrow { transform: translateX(4px); }
+
+  .btn-primary {
+    color: var(--marine-deep);
+    background: linear-gradient(180deg, var(--cyan-bright), var(--cyan));
+    box-shadow: 0 10px 30px -12px rgba(37, 186, 192, 0.65);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 18px 40px -14px rgba(37, 186, 192, 0.7); }
+
+  .btn-ghost {
+    color: var(--ink);
+    border-color: var(--line);
+    background: rgba(255, 255, 255, 0.02);
+  }
+  .btn-ghost:hover { border-color: var(--cyan); color: var(--cyan-bright); transform: translateY(-2px); }
+
+  :focus-visible { outline: 2px solid var(--cyan-bright); outline-offset: 3px; border-radius: 6px; }
+
+  /* Header */
+  header.site {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    backdrop-filter: blur(12px);
+    background: linear-gradient(180deg, rgba(7, 25, 28, 0.85), rgba(7, 25, 28, 0.35));
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+  }
+  .brand { display: inline-flex; align-items: center; }
+  .brand img { height: 34px; width: auto; display: block; }
+  .nav-links { display: none; gap: 2rem; font-size: 0.95rem; color: var(--ink-soft); }
+  .nav-links a:hover { color: var(--cyan-bright); }
+  .nav .btn { padding: 0.6rem 1.2rem; font-size: 0.9rem; }
+
+  @media (min-width: 860px) {
+    .nav-links { display: flex; }
+  }
+
+  /* Hero */
+  .hero { position: relative; padding-top: clamp(4rem, 9vh, 7rem); padding-bottom: var(--section-y); }
+  .hero-grid { display: grid; gap: 3rem; align-items: center; }
+  @media (min-width: 980px) {
+    .hero-grid { grid-template-columns: 1.15fr 0.85fr; gap: 4rem; }
+  }
+  .hero h1 {
+    font-size: clamp(2.6rem, 1.4rem + 5.4vw, 5rem);
+    font-weight: 700;
+    margin-top: 1.6rem;
+  }
+  .hero h1 .hl { color: var(--cyan-bright); }
+  .hero .lead { margin-top: 1.6rem; font-size: clamp(1.1rem, 1rem + 0.5vw, 1.35rem); }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2.4rem; }
+  .hero-meta {
+    display: flex; flex-wrap: wrap; gap: 1.4rem 2.4rem;
+    margin-top: 3rem; padding-top: 2rem;
+    border-top: 1px solid var(--line-soft);
+    color: var(--ink-mute); font-size: 0.92rem;
+  }
+  .hero-meta b { color: var(--ink); font-family: var(--font-display); font-weight: 600; display: block; font-size: 1.05rem; }
+
+  /* Hero visual */
+  .hero-visual {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    border-radius: 28px;
+    border: 1px solid var(--line);
+    background:
+      radial-gradient(80% 80% at 70% 20%, rgba(50, 9, 114, 0.7), transparent 70%),
+      linear-gradient(160deg, rgba(37, 186, 192, 0.12), rgba(14, 43, 49, 0.5));
+    overflow: hidden;
+    display: none;
+  }
+  @media (min-width: 980px) { .hero-visual { display: block; } }
+  .hero-visual .orb {
+    position: absolute;
+    width: 62%; aspect-ratio: 1;
+    left: 50%; top: 46%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, var(--cyan-bright), var(--violet) 55%, transparent 72%);
+    filter: blur(2px);
+    box-shadow: 0 0 90px 10px rgba(37, 186, 192, 0.25);
+    animation: float 7s ease-in-out infinite;
+  }
+  .hero-visual .ring {
+    position: absolute; inset: 14%;
+    border: 1px solid rgba(37, 186, 192, 0.28);
+    border-radius: 50%;
+  }
+  .hero-visual .ring.r2 { inset: 26%; border-color: rgba(255,255,255,0.08); }
+  .hero-visual .ring.r3 { inset: 38%; border-color: rgba(37, 186, 192, 0.16); }
+  @keyframes float {
+    0%, 100% { transform: translate(-50%, -50%); }
+    50% { transform: translate(-50%, -58%); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-visual .orb { animation: none; }
+  }
+
+  /* Section scaffolding */
+  section { padding-block: var(--section-y); }
+  .section-head { max-width: 62ch; }
+  .section-head h2 {
+    font-size: clamp(2rem, 1.3rem + 2.6vw, 3.25rem);
+    margin-top: 1.1rem;
+  }
+  .section-head p { margin-top: 1.2rem; color: var(--ink-soft); }
+
+  /* Problème */
+  .context { position: relative; }
+  .context-card {
+    border: 1px solid var(--line-soft);
+    border-radius: var(--radius);
+    background: linear-gradient(150deg, rgba(50, 9, 114, 0.28), rgba(14, 43, 49, 0.4));
+    padding: clamp(2rem, 4vw, 3.5rem);
+  }
+  .context-card h2 {
+    font-size: clamp(1.8rem, 1.2rem + 2.4vw, 3rem);
+    max-width: 20ch;
+  }
+  .context-card h2 .hl { color: var(--cyan-bright); }
+  .context-cols {
+    display: grid; gap: 1.5rem; margin-top: 2.4rem;
+  }
+  @media (min-width: 760px) { .context-cols { grid-template-columns: 1fr 1fr; gap: 2.4rem; } }
+  .context-cols p { margin: 0; color: var(--ink-soft); }
+
+  /* Services */
+  .cards { display: grid; gap: 1.4rem; margin-top: 3rem; }
+  @media (min-width: 820px) { .cards { grid-template-columns: repeat(3, 1fr); } }
+  .card {
+    position: relative;
+    display: flex; flex-direction: column;
+    border: 1px solid var(--line-soft);
+    border-radius: var(--radius);
+    background: linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.012));
+    padding: 2rem 1.8rem 2rem;
+    overflow: hidden;
+    transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+  }
+  .card::before {
+    content: "";
+    position: absolute; left: 0; top: 0; height: 3px; width: 100%;
+    background: linear-gradient(90deg, var(--cyan), var(--violet-soft));
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.35s ease;
+  }
+  .card:hover { transform: translateY(-6px); border-color: var(--line); background: linear-gradient(180deg, rgba(37,186,192,0.06), rgba(255,255,255,0.012)); }
+  .card:hover::before { transform: scaleX(1); }
+  .card .num {
+    font-family: var(--font-display); font-size: 0.85rem; font-weight: 600;
+    letter-spacing: 0.2em; color: var(--cyan); margin-bottom: 1.4rem;
+  }
+  .card h3 { font-size: 1.5rem; font-weight: 600; }
+  .card .desc { margin-top: 0.9rem; color: var(--ink-soft); font-size: 1rem; flex: 1; }
+  .card .price {
+    margin-top: 1.8rem; padding-top: 1.3rem;
+    border-top: 1px solid var(--line-soft);
+    display: flex; align-items: baseline; gap: 0.5rem;
+  }
+  .card .price .label { font-size: 0.82rem; color: var(--ink-mute); text-transform: uppercase; letter-spacing: 0.12em; }
+  .card .price .value { font-family: var(--font-display); font-weight: 600; color: var(--ink); font-size: 1.05rem; margin-left: auto; }
+
+  /* Pourquoi */
+  .why-grid { display: grid; gap: 1.2rem; margin-top: 3rem; }
+  @media (min-width: 860px) { .why-grid { grid-template-columns: repeat(3, 1fr); } }
+  .why {
+    display: flex; gap: 1.3rem; align-items: flex-start;
+    padding: 1.7rem 1.6rem;
+    border: 1px solid var(--line-soft);
+    border-radius: 14px;
+    background: rgba(255,255,255,0.02);
+    transition: border-color 0.3s ease;
+  }
+  .why:hover { border-color: var(--line); }
+  .why .mark {
+    flex: 0 0 auto;
+    width: 42px; height: 42px; border-radius: 11px;
+    display: grid; place-items: center;
+    font-family: var(--font-display); font-weight: 700;
+    color: var(--cyan-bright);
+    background: rgba(37, 186, 192, 0.1);
+    border: 1px solid var(--line);
+  }
+  .why h3 { font-size: 1.18rem; font-weight: 600; }
+  .why p { margin: 0.45rem 0 0; color: var(--ink-soft); font-size: 0.98rem; }
+
+  /* Final CTA */
+  .final {
+    text-align: center;
+    border-radius: 26px;
+    border: 1px solid var(--line);
+    padding: clamp(3rem, 8vw, 6rem) clamp(1.5rem, 5vw, 4rem);
+    background:
+      radial-gradient(70% 120% at 50% 0%, rgba(50, 9, 114, 0.6), transparent 65%),
+      linear-gradient(180deg, rgba(14, 43, 49, 0.6), rgba(7, 25, 28, 0.4));
+    position: relative; overflow: hidden;
+  }
+  .final h2 {
+    font-size: clamp(2rem, 1.3rem + 3vw, 3.6rem);
+    max-width: 18ch; margin-inline: auto;
+  }
+  .final h2 .hl { color: var(--cyan-bright); }
+  .final p { margin: 1.4rem auto 0; max-width: 48ch; color: var(--ink-soft); }
+  .final .btn { margin-top: 2.6rem; }
+
+  /* Footer */
+  footer.site {
+    border-top: 1px solid var(--line-soft);
+    padding-block: clamp(3rem, 6vh, 4.5rem);
+    margin-top: var(--section-y);
+  }
+  .foot {
+    display: grid; gap: 2rem;
+  }
+  @media (min-width: 720px) {
+    .foot { grid-template-columns: 1fr auto; align-items: end; }
+  }
+  .foot .brand img { height: 54px; }
+  .foot .tag { color: var(--ink-mute); margin-top: 0.6rem; font-size: 0.95rem; max-width: 40ch; }
+  .foot-right { display: flex; flex-direction: column; gap: 0.6rem; }
+  .foot-right .city { color: var(--ink-mute); font-size: 0.9rem; letter-spacing: 0.05em; text-transform: uppercase; font-family: var(--font-display); }
+  .foot-right a.mail { font-family: var(--font-display); font-weight: 600; font-size: 1.15rem; color: var(--ink); }
+  .foot-right a.mail:hover { color: var(--cyan-bright); }
+  .foot-bottom {
+    margin-top: 2.6rem; padding-top: 1.6rem;
+    border-top: 1px solid var(--line-soft);
+    display: flex; flex-wrap: wrap; gap: 0.6rem 1.5rem; justify-content: space-between;
+    color: var(--ink-mute); font-size: 0.85rem;
+  }
+
+  /* Scroll reveal — progressive enhancement, content visible by default */
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      .reveal {
+        opacity: 0;
+        transform: translateY(26px);
+        animation: reveal-in linear both;
+        animation-timeline: view();
+        animation-range: entry 5% cover 26%;
+      }
+    }
+  }
+  @keyframes reveal-in {
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <nav class="nav wrap" aria-label="Navigation principale">
+    <a class="brand" href="#top" aria-label="NOVAËN, accueil"><img src="assets/novaen-logo-dark.png" alt="NOVAËN — From Spark To The Star"></a>
+    <div class="nav-links">
+      <a href="#contexte">Contexte</a>
+      <a href="#services">Services</a>
+      <a href="#pourquoi">Pourquoi nous</a>
+    </div>
+    <a class="btn btn-ghost" href="mailto:ctn@novaen.fr?subject=Prise%20de%20contact">Prendre contact</a>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow">Intelligence artificielle · Paris</span>
+        <h1 id="hero-title">On met l'IA <span class="hl">au travail</span> dans votre entreprise.</h1>
+        <p class="lead">NOVAËN conçoit, installe et fait adopter des solutions d'IA concrètes pour les entreprises B2B. Pas une démo de plus — des outils qui tournent dans vos processus, tous les jours.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="mailto:ctn@novaen.fr?subject=Prise%20de%20contact">Prendre contact <span class="arrow" aria-hidden="true">→</span></a>
+          <a class="btn btn-ghost" href="#services">Voir nos services</a>
+        </div>
+        <div class="hero-meta">
+          <div><b>Agents sur mesure</b>Automatisation &amp; assistants</div>
+          <div><b>Formation</b>Vos équipes en autonomie</div>
+          <div><b>Stratégie</b>Feuille de route IA</div>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="ring"></div>
+        <div class="ring r2"></div>
+        <div class="ring r3"></div>
+        <div class="orb"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTEXTE / PROBLÈME -->
+  <section id="contexte" class="context" aria-labelledby="context-title">
+    <div class="wrap reveal">
+      <div class="context-card">
+        <span class="eyebrow">Le constat</span>
+        <h2 id="context-title">L'IA transforme déjà les entreprises. <span class="hl">La plupart ne savent pas par où commencer.</span></h2>
+        <div class="context-cols">
+          <p>Les outils se multiplient, tout le monde en parle, et pourtant l'écart se creuse entre celles qui intègrent vraiment l'IA et celles qui regardent passer le train. Entre une démo qui impressionne et un usage qui tient dans la durée, il y a un fossé.</p>
+          <p>Ce fossé, c'est exactement là qu'on intervient. On part de vos processus réels, on identifie ce qui mérite d'être automatisé, et on construit ce qui apporte un résultat mesurable. Sans surpromesse, sans usine à gaz.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" aria-labelledby="services-title">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Ce qu'on fait</span>
+        <h2 id="services-title">Trois manières de travailler ensemble</h2>
+        <p>De l'outil qu'on construit pour vous à l'autonomie de vos équipes, on adapte le format à votre point de départ.</p>
+      </div>
+      <div class="cards">
+        <article class="card reveal">
+          <div class="num">01</div>
+          <h3>Audit IA</h3>
+          <p class="desc">On analyse vos processus internes en profondeur, on repère les tâches qui méritent d'être automatisées et on vous remet des propositions de solutions concrètes, priorisées par impact.</p>
+          <div class="price">
+            <span class="label">Tarif</span>
+            <span class="value">Tarif horaire</span>
+          </div>
+        </article>
+        <article class="card reveal">
+          <div class="num">02</div>
+          <h3>Développement d'agents IA sur mesure</h3>
+          <p class="desc">On conçoit et déploie des agents IA taillés pour vos besoins : automatisation de processus, assistants internes, connecteurs entre vos outils. On construit, on maintient, on fait évoluer.</p>
+          <div class="price">
+            <span class="label">Tarif</span>
+            <span class="value">Abonnement mensuel</span>
+          </div>
+        </article>
+        <article class="card reveal">
+          <div class="num">03</div>
+          <h3>Formation IA</h3>
+          <p class="desc">On forme vos équipes à adopter l'IA au quotidien : choix des bons outils, bonnes pratiques, usages avancés. Des sessions concrètes, sur vos propres cas.</p>
+          <div class="price">
+            <span class="label">Tarif</span>
+            <span class="value">Tarif horaire</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- POURQUOI -->
+  <section id="pourquoi" aria-labelledby="why-title">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Pourquoi NOVAËN</span>
+        <h2 id="why-title">Un fondateur, pas une agence anonyme</h2>
+        <p>NOVAËN est née de l'envie de faire les choses bien : du code qui marche, des gens qu'on respecte, des résultats qu'on peut mesurer.</p>
+      </div>
+      <div class="why-grid">
+        <div class="why reveal">
+          <div class="mark" aria-hidden="true">&lt;/&gt;</div>
+          <div>
+            <h3>Expertise technique réelle</h3>
+            <p>On ne sous-traite pas. On code, on intègre et on comprend ce qui se passe sous le capot — donc on sait ce qui est faisable, et à quel coût.</p>
+          </div>
+        </div>
+        <div class="why reveal">
+          <div class="mark" aria-hidden="true">◎</div>
+          <div>
+            <h3>Approche terrain</h3>
+            <p>On commence par vos processus, vos contraintes, vos équipes. La techno vient après le problème, jamais l'inverse.</p>
+          </div>
+        </div>
+        <div class="why reveal">
+          <div class="mark" aria-hidden="true">↯</div>
+          <div>
+            <h3>Franc et transparent</h3>
+            <p>Pas de jargon, pas de promesses creuses. On vous dit ce qui marche, ce qui ne marche pas encore, et ce qu'on en pense vraiment.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section id="contact" aria-labelledby="final-title">
+    <div class="wrap reveal">
+      <div class="final">
+        <span class="eyebrow">On en parle</span>
+        <h2 id="final-title">Vous avez un projet IA ? <span class="hl">Discutons-en.</span></h2>
+        <p>Un échange simple, sans engagement, pour comprendre où vous en êtes et voir ce qu'on peut construire ensemble.</p>
+        <a class="btn btn-primary" href="mailto:ctn@novaen.fr?subject=Mon%20projet%20IA">Discutons de votre projet <span class="arrow" aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <a class="brand" href="#top" aria-label="NOVAËN"><img src="assets/novaen-logo-dark.png" alt="NOVAËN — From Spark To The Star"></a>
+        <p class="tag">Solutions d'intelligence artificielle pour les entreprises B2B.</p>
+      </div>
+      <div class="foot-right">
+        <span class="city">Paris · France</span>
+        <a class="mail" href="mailto:ctn@novaen.fr">ctn@novaen.fr</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 NOVAËN. Tous droits réservés.</span>
+      <span>Intelligence artificielle · Paris</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
