@@ -178,6 +178,18 @@
   .brand img { height: 64px; width: auto; display: block; }
   .nav-links { display: none; gap: 2rem; font-size: 0.95rem; color: #38535a; font-weight: 500; }
   .nav-links a:hover { color: var(--violet); }
+  .nav-links a.active {
+    color: var(--violet);
+    position: relative;
+  }
+  .nav-links a.active::after {
+    content: "";
+    position: absolute;
+    bottom: -4px; left: 0; right: 0;
+    height: 2px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--violet), #7c3aed);
+  }
   .nav .btn { padding: 0.6rem 1.2rem; font-size: 0.9rem; }
   header.site .btn-ghost {
     color: #fff;
@@ -735,6 +747,27 @@
       el.addEventListener('mouseleave', function() { dot.classList.remove('hover'); ring.classList.remove('hover'); });
     });
   }
+
+  // Active nav selon la section visible
+  (function() {
+    var navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+    var sections = Array.from(navLinks).map(function(link) {
+      return document.querySelector(link.getAttribute('href'));
+    });
+
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          var id = entry.target.getAttribute('id');
+          navLinks.forEach(function(link) {
+            link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+          });
+        }
+      });
+    }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
+
+    sections.forEach(function(section) { if (section) observer.observe(section); });
+  })();
 
   // Formulaire de contact
   document.getElementById('contact-form').addEventListener('submit', function(e) {
