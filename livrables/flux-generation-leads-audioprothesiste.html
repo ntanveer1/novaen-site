@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flux Génération de Leads – Audioprothésiste</title>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f8f9fb;
+      color: #1a1a2e;
+      padding: 48px 40px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+
+    header h1 {
+      font-size: 24px;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin-bottom: 8px;
+    }
+
+    header p {
+      font-size: 14px;
+      color: #666;
+    }
+
+    .diagram-container {
+      background: white;
+      border-radius: 16px;
+      padding: 40px;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.07);
+      display: flex;
+      justify-content: center;
+    }
+
+    .mermaid {
+      max-width: 700px;
+      width: 100%;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 32px;
+      font-size: 12px;
+      color: #aaa;
+    }
+
+    @media print {
+      body { background: white; padding: 20px; }
+      .diagram-container { box-shadow: none; border: 1px solid #eee; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Génération de Leads avec l'IA</h1>
+    <p>Flux automatisé — de la publicité au rendez-vous confirmé</p>
+  </header>
+
+  <div class="diagram-container">
+    <div class="mermaid">
+flowchart TD
+    A["📱 PUBLICITÉ\nMeta Ads / Google Ads\nCiblage 55+, zone géographique"]
+    B["📋 FORMULAIRE EN LIGNE\nNom · Téléphone · Problème auditif"]
+    C["⚡ AGENT IA\nDéclenché automatiquement\ndès la réception du formulaire"]
+    D["💬 CONTACT AUTOMATIQUE\nSMS ou WhatsApp envoyé\nen moins de 5 minutes"]
+    E{"Le prospect répond ?"}
+    F["📅 LIEN DE PRISE DE RDV\nLe prospect choisit son créneau\nen toute autonomie"]
+    G["🔁 RELANCE AUTOMATIQUE\nJ+1 puis J+2\nsi pas de réponse"]
+    H["✅ RDV CONFIRMÉ\nEnregistré dans votre logiciel client\nautomatiquement"]
+    I["👨‍⚕️ CONSULTATION\nBilan auditif gratuit"]
+
+    A --> B
+    B --> C
+    C --> D
+    D --> E
+    E -->|Oui| F
+    E -->|Non| G
+    G --> E
+    F --> H
+    H --> I
+
+    style A fill:#4361ee,color:#fff,stroke:#4361ee
+    style B fill:#4361ee,color:#fff,stroke:#4361ee
+    style C fill:#f72585,color:#fff,stroke:#f72585
+    style D fill:#f72585,color:#fff,stroke:#f72585
+    style E fill:#fff,color:#1a1a2e,stroke:#4361ee,stroke-width:2px
+    style F fill:#4cc9f0,color:#fff,stroke:#4cc9f0
+    style G fill:#f72585,color:#fff,stroke:#f72585
+    style H fill:#4cc9f0,color:#fff,stroke:#4cc9f0
+    style I fill:#06d6a0,color:#fff,stroke:#06d6a0
+    </div>
+  </div>
+
+  <footer>
+    Proposé par NOVAËN · Solutions IA pour professionnels de santé
+  </footer>
+
+  <script>
+    mermaid.initialize({ startOnLoad: true, theme: 'base', flowchart: { curve: 'basis', padding: 20 } });
+  </script>
+
+</body>
+</html>

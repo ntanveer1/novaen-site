@@ -534,6 +534,93 @@
     font-weight: 600;
   }
 
+  /* Publications */
+  .publications { padding-block: var(--section-y); }
+  .pub-intro { max-width: 640px; }
+  .pub-intro p { color: var(--ink-soft); margin-top: 0.75rem; }
+  .pub-tabs {
+    display: flex; gap: 0;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 2.5rem;
+  }
+  .pub-tab {
+    background: none; border: none;
+    color: var(--ink-mute);
+    font-family: var(--font-display); font-size: 0.95rem; font-weight: 500;
+    padding: 0.75rem 1.5rem;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .pub-tab:hover { color: var(--ink); }
+  .pub-tab.active { color: var(--cyan-bright); border-bottom-color: var(--cyan-bright); }
+  .pub-panel { display: none; }
+  .pub-panel.active { display: block; }
+  .pub-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  @media (max-width: 900px) { .pub-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px) { .pub-grid { grid-template-columns: 1fr; } }
+  .pub-card {
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: border-color 0.25s, transform 0.25s;
+  }
+  .pub-card:hover { border-color: var(--cyan); transform: translateY(-4px); }
+  .pub-card-img {
+    width: 100%; display: block;
+    height: 220px;
+    object-fit: cover; object-position: top;
+  }
+  .pub-card-body { padding: 1.25rem 1.25rem 1.5rem; }
+  .pub-badge {
+    display: inline-block;
+    font-size: 0.63rem; font-weight: 700;
+    letter-spacing: 0.09em; text-transform: uppercase;
+    color: var(--cyan-bright);
+    background: rgba(67, 224, 230, 0.08);
+    border: 1px solid rgba(67, 224, 230, 0.2);
+    border-radius: 6px;
+    padding: 0.18rem 0.55rem;
+    margin-bottom: 0.7rem;
+  }
+  .pub-badge.news {
+    color: #f59e0b;
+    background: rgba(245, 158, 11, 0.08);
+    border-color: rgba(245, 158, 11, 0.2);
+  }
+  .pub-card h3 {
+    font-size: 1rem; font-weight: 600;
+    color: var(--ink); line-height: 1.4;
+    margin-bottom: 0.45rem;
+  }
+  .pub-card-desc { font-size: 0.84rem; color: var(--ink-soft); line-height: 1.6; }
+  .news-items {
+    list-style: none; padding: 0; margin: 0.6rem 0 0;
+    display: flex; flex-direction: column; gap: 0.55rem;
+  }
+  .news-item {
+    font-size: 0.82rem; color: var(--ink-soft);
+    padding-left: 1rem; position: relative; line-height: 1.45;
+  }
+  .news-item::before { content: '→'; position: absolute; left: 0; color: var(--cyan); }
+  .news-focus {
+    margin-top: 0.9rem;
+    padding: 0.5rem 0.75rem;
+    background: rgba(67, 224, 230, 0.05);
+    border-left: 2px solid var(--cyan);
+    border-radius: 0 6px 6px 0;
+    font-size: 0.78rem; color: var(--ink-soft);
+  }
+  .news-focus strong { color: var(--cyan-bright); font-weight: 600; }
+  .pub-card.text-only .pub-card-body { padding: 1.5rem; }
+  #pub-title .hl { color: var(--cyan-bright); }
+
   /* Scroll reveal — progressive enhancement, content visible by default */
   @media (prefers-reduced-motion: no-preference) {
     @supports (animation-timeline: view()) {
@@ -563,6 +650,7 @@
       <a href="#contexte">Contexte</a>
       <a href="#services">Services</a>
       <a href="#pourquoi">Pourquoi nous</a>
+      <a href="#publications">Publications</a>
     </div>
     <a class="btn btn-ghost" href="#contact">Prendre contact</a>
   </nav>
@@ -671,6 +759,154 @@
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- PUBLICATIONS -->
+  <section id="publications" class="publications">
+    <div class="wrap">
+      <div class="section-head reveal pub-intro">
+        <span class="eyebrow">LinkedIn</span>
+        <h2 id="pub-title">Nos <span class="hl">publications</span></h2>
+        <p>Chaque mardi, un concept IA expliqué simplement. Chaque vendredi, les actualités de la semaine.</p>
+      </div>
+
+      <div class="pub-tabs">
+        <button class="pub-tab active" onclick="switchTab('pedagogie', this)">📚 Pédagogie IA</button>
+        <button class="pub-tab" onclick="switchTab('news', this)">⚡ News de la semaine</button>
+      </div>
+
+      <!-- PÉDAGOGIE IA -->
+      <div class="pub-panel active" id="panel-pedagogie">
+        <div class="pub-grid">
+
+          <div class="pub-card reveal">
+            <img class="pub-card-img" src="assets/posts/pedagogie-prompt.jpg" alt="Le prompt : comment bien parler à une IA ?" loading="lazy">
+            <div class="pub-card-body">
+              <span class="pub-badge">Pédagogie IA</span>
+              <h3>Le prompt : comment bien parler à une IA ?</h3>
+              <p class="pub-card-desc">5 règles essentielles pour obtenir des résultats utiles de ChatGPT, Gemini ou Claude. Soyez précis, donnez le contexte, précisez la forme, donnez un rôle, itérez.</p>
+            </div>
+          </div>
+
+          <div class="pub-card reveal">
+            <img class="pub-card-img" src="assets/posts/pedagogie-emplois.jpg" alt="L'IA va-t-elle vraiment supprimer des emplois ?" loading="lazy">
+            <div class="pub-card-body">
+              <span class="pub-badge">Prise de position</span>
+              <h3>L'IA va-t-elle vraiment supprimer des emplois ?</h3>
+              <p class="pub-card-desc">La réponse honnête, ni catastrophiste ni naïve. Ce qui disparaît, ce qui se transforme, ce qui se crée. Le vrai risque : ne pas apprendre à travailler avec l'IA.</p>
+            </div>
+          </div>
+
+          <div class="pub-card reveal">
+            <img class="pub-card-img" src="assets/posts/pedagogie-3-erreurs.jpg" alt="3 erreurs que tout le monde fait avec l'IA" loading="lazy">
+            <div class="pub-card-body">
+              <span class="pub-badge">Erreurs courantes</span>
+              <h3>3 erreurs que tout le monde fait avec l'IA</h3>
+              <p class="pub-card-desc">Lui faire confiance les yeux fermés, poser des questions de 3 mots, abandonner après la première réponse. Et comment les éviter.</p>
+            </div>
+          </div>
+
+          <div class="pub-card reveal">
+            <img class="pub-card-img" src="assets/posts/pedagogie-agent-ia.jpg" alt="C'est quoi un agent IA ?" loading="lazy">
+            <div class="pub-card-body">
+              <span class="pub-badge">Pédagogie IA</span>
+              <h3>C'est quoi un agent IA ?</h3>
+              <p class="pub-card-desc">La différence entre une IA qui répond et un agent qui agit. En 3 temps : vous donnez un objectif, il découpe la mission, il exécute seul.</p>
+            </div>
+          </div>
+
+          <div class="pub-card reveal">
+            <img class="pub-card-img" src="assets/posts/pedagogie-ia-souveraine.jpg" alt="L'IA souveraine, c'est quoi ?" loading="lazy">
+            <div class="pub-card-body">
+              <span class="pub-badge">Pédagogie IA</span>
+              <h3>L'IA souveraine, c'est quoi ?</h3>
+              <p class="pub-card-desc">Une IA dont les données restent en France ou en Europe. Ce n'est pas du patriotisme : c'est garder le contrôle de vos données d'entreprise.</p>
+            </div>
+          </div>
+
+          <div class="pub-card reveal">
+            <img class="pub-card-img" src="assets/posts/pedagogie-bon-sens.jpg" alt="L'IA a-t-elle du bon sens ?" loading="lazy">
+            <div class="pub-card-body">
+              <span class="pub-badge">Le test qui fait réfléchir</span>
+              <h3>L'IA a-t-elle du bon sens ?</h3>
+              <p class="pub-card-desc">Une question simple a mis ChatGPT et Copilot en échec, quand Gemini a trouvé la bonne réponse. L'IA suit la logique, pas toujours le bon sens.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- NEWS DE LA SEMAINE -->
+      <div class="pub-panel" id="panel-news">
+        <div class="pub-grid">
+
+          <div class="pub-card reveal">
+            <img class="pub-card-img" src="assets/posts/news-22juin-1.jpg" alt="News IA — Semaine du 22 juin 2026" loading="lazy">
+            <div class="pub-card-body">
+              <span class="pub-badge news">⚡ Semaine du 22 juin 2026</span>
+              <ul class="news-items">
+                <li class="news-item">La justice suspend ChatGPT dans une entreprise française — 1 000 € d'astreinte par jour</li>
+                <li class="news-item">Med-Gemini détecte les cancers avec 11 % de précision en plus qu'un radiologue senior</li>
+                <li class="news-item">97 % des jeunes connaissent l'IA, contre 51 % des seniors</li>
+              </ul>
+              <div class="news-focus">Focus : <strong>Déployer une IA : ce que la loi impose</strong></div>
+            </div>
+          </div>
+
+          <div class="pub-card reveal">
+            <img class="pub-card-img" src="assets/posts/news-15juin-1.jpg" alt="News IA — Semaine du 15 juin 2026" loading="lazy">
+            <div class="pub-card-body">
+              <span class="pub-badge news">⚡ Semaine du 15 juin 2026</span>
+              <ul class="news-items">
+                <li class="news-item">L'État équipe 1 million de fonctionnaires avec une IA française bâtie sur Mistral</li>
+                <li class="news-item">Les USA interdisent à Anthropic d'exporter ses modèles les plus puissants à l'étranger</li>
+                <li class="news-item">13 % des Français demanderaient à une IA pour qui voter à la présidentielle 2027</li>
+              </ul>
+              <div class="news-focus">Focus : <strong>L'IA de l'État : ce que ça change pour vous</strong></div>
+            </div>
+          </div>
+
+          <div class="pub-card reveal">
+            <img class="pub-card-img" src="assets/posts/news-08juin-1.jpg" alt="News IA — Semaine du 8 juin 2026" loading="lazy">
+            <div class="pub-card-body">
+              <span class="pub-badge news">⚡ Semaine du 8 juin 2026</span>
+              <ul class="news-items">
+                <li class="news-item">Apple paie 1 milliard $/an à Google pour faire tourner le nouveau Siri sur l'IA Gemini</li>
+                <li class="news-item">Dès le 2 août, tout contenu créé par IA devra être signalé comme tel (loi européenne)</li>
+                <li class="news-item">Dreambeans : une IA qui transforme votre vie en bande dessinée chaque matin</li>
+              </ul>
+              <div class="news-focus">Focus : <strong>Apple et Siri : pourquoi ce virage est historique</strong></div>
+            </div>
+          </div>
+
+          <div class="pub-card text-only reveal">
+            <div class="pub-card-body">
+              <span class="pub-badge news">⚡ 5 juin 2026</span>
+              <ul class="news-items">
+                <li class="news-item">SoftBank annonce 75 milliards € investis en France pour des data centers IA — le plus grand investissement IA jamais annoncé en Europe</li>
+                <li class="news-item">Un modèle OpenAI résout un problème de maths posé par Erdős en 1946, non résolu depuis 80 ans — validé par 9 mathématiciens dont un médaillé Fields</li>
+              </ul>
+              <div class="news-focus">Le détail : <strong>Erdős avait promis 500 $ à qui résoudrait son problème. Une IA l'a fait. Mais une IA ne peut pas toucher un chèque.</strong></div>
+            </div>
+          </div>
+
+          <div class="pub-card reveal">
+            <img class="pub-card-img" src="assets/posts/news-26mai-1.jpg" alt="News IA — Semaine du 26 mai 2026" loading="lazy">
+            <div class="pub-card-body">
+              <span class="pub-badge news">⚡ Semaine du 26 mai 2026</span>
+              <ul class="news-items">
+                <li class="news-item">Anthropic (Claude) dépasse OpenAI pour la 1ère fois — valorisation de 965 milliards de dollars</li>
+                <li class="news-item">OpenAI et Anthropic préparent leur entrée en bourse pour l'automne 2026</li>
+                <li class="news-item">76 % des Français utilisent l'IA, dont 52 % dans un contexte amoureux</li>
+              </ul>
+              <div class="news-focus">Focus : <strong>Entrer en bourse : qu'est-ce que ça veut dire ?</strong></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -827,6 +1063,14 @@
       });
     });
   })();
+
+  // Onglets publications
+  function switchTab(tabName, btn) {
+    document.querySelectorAll('.pub-tab').forEach(function(t) { t.classList.remove('active'); });
+    document.querySelectorAll('.pub-panel').forEach(function(p) { p.classList.remove('active'); });
+    btn.classList.add('active');
+    document.getElementById('panel-' + tabName).classList.add('active');
+  }
 
   // Formulaire de contact
   document.getElementById('contact-form').addEventListener('submit', function(e) {
