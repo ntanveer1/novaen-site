@@ -621,6 +621,36 @@
   .pub-card.text-only .pub-card-body { padding: 1.5rem; }
   #pub-title .hl { color: var(--cyan-bright); }
 
+  /* Lightbox */
+  .pub-card { cursor: pointer; }
+  .lightbox {
+    display: none;
+    position: fixed; inset: 0; z-index: 1000;
+    background: rgba(7, 25, 28, 0.92);
+    backdrop-filter: blur(8px);
+    align-items: center; justify-content: center;
+    padding: 1.5rem;
+  }
+  .lightbox.open { display: flex; }
+  .lightbox-inner {
+    position: relative;
+    max-width: 560px; width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    display: flex; flex-direction: column; gap: 6px;
+    border-radius: 16px; overflow: hidden;
+  }
+  .lightbox-inner img { width: 100%; display: block; border-radius: 0; }
+  .lightbox-close {
+    position: fixed; top: 1.25rem; right: 1.25rem;
+    background: rgba(255,255,255,0.1); border: none;
+    color: var(--ink); font-size: 1.4rem;
+    width: 40px; height: 40px; border-radius: 50%;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s;
+  }
+  .lightbox-close:hover { background: rgba(255,255,255,0.2); }
+
   /* Scroll reveal — progressive enhancement, content visible by default */
   @media (prefers-reduced-motion: no-preference) {
     @supports (animation-timeline: view()) {
@@ -780,7 +810,7 @@
       <div class="pub-panel active" id="panel-pedagogie">
         <div class="pub-grid">
 
-          <div class="pub-card reveal">
+          <div class="pub-card reveal" data-slides='["assets/posts/pedagogie-prompt.jpg"]'>
             <img class="pub-card-img" src="assets/posts/pedagogie-prompt.jpg" alt="Le prompt : comment bien parler à une IA ?" loading="lazy">
             <div class="pub-card-body">
               <span class="pub-badge">Pédagogie IA</span>
@@ -789,7 +819,7 @@
             </div>
           </div>
 
-          <div class="pub-card reveal">
+          <div class="pub-card reveal" data-slides='["assets/posts/pedagogie-emplois.jpg"]'>
             <img class="pub-card-img" src="assets/posts/pedagogie-emplois.jpg" alt="L'IA va-t-elle vraiment supprimer des emplois ?" loading="lazy">
             <div class="pub-card-body">
               <span class="pub-badge">Prise de position</span>
@@ -798,7 +828,7 @@
             </div>
           </div>
 
-          <div class="pub-card reveal">
+          <div class="pub-card reveal" data-slides='["assets/posts/pedagogie-3-erreurs.jpg"]'>
             <img class="pub-card-img" src="assets/posts/pedagogie-3-erreurs.jpg" alt="3 erreurs que tout le monde fait avec l'IA" loading="lazy">
             <div class="pub-card-body">
               <span class="pub-badge">Erreurs courantes</span>
@@ -807,7 +837,7 @@
             </div>
           </div>
 
-          <div class="pub-card reveal">
+          <div class="pub-card reveal" data-slides='["assets/posts/pedagogie-agent-ia.jpg"]'>
             <img class="pub-card-img" src="assets/posts/pedagogie-agent-ia.jpg" alt="C'est quoi un agent IA ?" loading="lazy">
             <div class="pub-card-body">
               <span class="pub-badge">Pédagogie IA</span>
@@ -816,7 +846,7 @@
             </div>
           </div>
 
-          <div class="pub-card reveal">
+          <div class="pub-card reveal" data-slides='["assets/posts/pedagogie-ia-souveraine.jpg"]'>
             <img class="pub-card-img" src="assets/posts/pedagogie-ia-souveraine.jpg" alt="L'IA souveraine, c'est quoi ?" loading="lazy">
             <div class="pub-card-body">
               <span class="pub-badge">Pédagogie IA</span>
@@ -825,7 +855,7 @@
             </div>
           </div>
 
-          <div class="pub-card reveal">
+          <div class="pub-card reveal" data-slides='["assets/posts/pedagogie-bon-sens.jpg"]'>
             <img class="pub-card-img" src="assets/posts/pedagogie-bon-sens.jpg" alt="L'IA a-t-elle du bon sens ?" loading="lazy">
             <div class="pub-card-body">
               <span class="pub-badge">Le test qui fait réfléchir</span>
@@ -841,7 +871,7 @@
       <div class="pub-panel" id="panel-news">
         <div class="pub-grid">
 
-          <div class="pub-card reveal">
+          <div class="pub-card reveal" data-slides='["assets/posts/news-22juin-1.jpg","assets/posts/news-22juin-2.jpg"]'>
             <img class="pub-card-img" src="assets/posts/news-22juin-1.jpg" alt="News IA — Semaine du 22 juin 2026" loading="lazy">
             <div class="pub-card-body">
               <span class="pub-badge news">⚡ Semaine du 22 juin 2026</span>
@@ -854,7 +884,7 @@
             </div>
           </div>
 
-          <div class="pub-card reveal">
+          <div class="pub-card reveal" data-slides='["assets/posts/news-15juin-1.jpg","assets/posts/news-15juin-2.jpg"]'>
             <img class="pub-card-img" src="assets/posts/news-15juin-1.jpg" alt="News IA — Semaine du 15 juin 2026" loading="lazy">
             <div class="pub-card-body">
               <span class="pub-badge news">⚡ Semaine du 15 juin 2026</span>
@@ -867,7 +897,7 @@
             </div>
           </div>
 
-          <div class="pub-card reveal">
+          <div class="pub-card reveal" data-slides='["assets/posts/news-08juin-1.jpg","assets/posts/news-08juin-2.jpg"]'>
             <img class="pub-card-img" src="assets/posts/news-08juin-1.jpg" alt="News IA — Semaine du 8 juin 2026" loading="lazy">
             <div class="pub-card-body">
               <span class="pub-badge news">⚡ Semaine du 8 juin 2026</span>
@@ -891,7 +921,7 @@
             </div>
           </div>
 
-          <div class="pub-card reveal">
+          <div class="pub-card reveal" data-slides='["assets/posts/news-26mai-1.jpg","assets/posts/news-26mai-2.jpg"]'>
             <img class="pub-card-img" src="assets/posts/news-26mai-1.jpg" alt="News IA — Semaine du 26 mai 2026" loading="lazy">
             <div class="pub-card-body">
               <span class="pub-badge news">⚡ Semaine du 26 mai 2026</span>
@@ -964,6 +994,12 @@
   </section>
 
 </main>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+  <button class="lightbox-close" id="lightbox-close" aria-label="Fermer">✕</button>
+  <div class="lightbox-inner" id="lightbox-inner"></div>
+</div>
 
 <footer class="site">
   <div class="wrap">
@@ -1061,6 +1097,40 @@
         link.classList.add('active');
         moveIndicator(link);
       });
+    });
+  })();
+
+  // Lightbox
+  (function() {
+    var lb = document.getElementById('lightbox');
+    var inner = document.getElementById('lightbox-inner');
+    var closeBtn = document.getElementById('lightbox-close');
+
+    function openLightbox(slides) {
+      inner.innerHTML = slides.map(function(src) {
+        return '<img src="' + src + '" alt="">';
+      }).join('');
+      lb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lb.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('.pub-card[data-slides]').forEach(function(card) {
+      card.addEventListener('click', function() {
+        openLightbox(JSON.parse(card.dataset.slides));
+      });
+    });
+
+    closeBtn.addEventListener('click', closeLightbox);
+    lb.addEventListener('click', function(e) {
+      if (e.target === lb) closeLightbox();
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeLightbox();
     });
   })();
 
