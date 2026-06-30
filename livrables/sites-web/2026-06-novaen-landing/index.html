@@ -620,6 +620,17 @@
   .news-focus strong { color: var(--cyan-bright); font-weight: 600; }
   .pub-card.text-only .pub-card-body { padding: 1.5rem; }
   #pub-title .hl { color: var(--cyan-bright); }
+  .pub-extra { display: none; }
+  .pub-voir-plus { display: flex; justify-content: center; margin-top: 2rem; }
+  .btn-voir-plus {
+    background: none;
+    border: 1px solid var(--line);
+    color: var(--ink-soft);
+    font-family: var(--font-display); font-size: 0.9rem; font-weight: 500;
+    padding: 0.65rem 2rem; border-radius: 99px;
+    cursor: pointer; transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-voir-plus:hover { border-color: var(--cyan); color: var(--cyan-bright); }
 
   /* Lightbox */
   .pub-card { cursor: pointer; }
@@ -842,52 +853,7 @@
 
       <!-- PÉDAGOGIE IA -->
       <div class="pub-panel active" id="panel-pedagogie">
-        <div class="pub-grid">
-
-          <div class="pub-card reveal" data-slides='["assets/posts/pedagogie-prompt.jpg"]'>
-            <img class="pub-card-img" src="assets/posts/pedagogie-prompt.jpg" alt="Le prompt : comment bien parler à une IA ?" loading="lazy">
-            <div class="pub-card-body">
-              <span class="pub-badge">Pédagogie IA</span>
-              <h3>Le prompt : comment bien parler à une IA ?</h3>
-              <p class="pub-card-desc">5 règles essentielles pour obtenir des résultats utiles de ChatGPT, Gemini ou Claude. Soyez précis, donnez le contexte, précisez la forme, donnez un rôle, itérez.</p>
-            </div>
-          </div>
-
-          <div class="pub-card reveal" data-slides='["assets/posts/pedagogie-emplois.jpg"]'>
-            <img class="pub-card-img" src="assets/posts/pedagogie-emplois.jpg" alt="L'IA va-t-elle vraiment supprimer des emplois ?" loading="lazy">
-            <div class="pub-card-body">
-              <span class="pub-badge">Prise de position</span>
-              <h3>L'IA va-t-elle vraiment supprimer des emplois ?</h3>
-              <p class="pub-card-desc">La réponse honnête, ni catastrophiste ni naïve. Ce qui disparaît, ce qui se transforme, ce qui se crée. Le vrai risque : ne pas apprendre à travailler avec l'IA.</p>
-            </div>
-          </div>
-
-          <div class="pub-card reveal" data-slides='["assets/posts/pedagogie-3-erreurs.jpg"]'>
-            <img class="pub-card-img" src="assets/posts/pedagogie-3-erreurs.jpg" alt="3 erreurs que tout le monde fait avec l'IA" loading="lazy">
-            <div class="pub-card-body">
-              <span class="pub-badge">Erreurs courantes</span>
-              <h3>3 erreurs que tout le monde fait avec l'IA</h3>
-              <p class="pub-card-desc">Lui faire confiance les yeux fermés, poser des questions de 3 mots, abandonner après la première réponse. Et comment les éviter.</p>
-            </div>
-          </div>
-
-          <div class="pub-card reveal" data-slides='["assets/posts/pedagogie-agent-ia.jpg"]'>
-            <img class="pub-card-img" src="assets/posts/pedagogie-agent-ia.jpg" alt="C'est quoi un agent IA ?" loading="lazy">
-            <div class="pub-card-body">
-              <span class="pub-badge">Pédagogie IA</span>
-              <h3>C'est quoi un agent IA ?</h3>
-              <p class="pub-card-desc">La différence entre une IA qui répond et un agent qui agit. En 3 temps : vous donnez un objectif, il découpe la mission, il exécute seul.</p>
-            </div>
-          </div>
-
-          <div class="pub-card reveal" data-slides='["assets/posts/pedagogie-ia-souveraine.jpg"]'>
-            <img class="pub-card-img" src="assets/posts/pedagogie-ia-souveraine.jpg" alt="L'IA souveraine, c'est quoi ?" loading="lazy">
-            <div class="pub-card-body">
-              <span class="pub-badge">Pédagogie IA</span>
-              <h3>L'IA souveraine, c'est quoi ?</h3>
-              <p class="pub-card-desc">Une IA dont les données restent en France ou en Europe. Ce n'est pas du patriotisme : c'est garder le contrôle de vos données d'entreprise.</p>
-            </div>
-          </div>
+        <div class="pub-grid" id="grid-pedagogie">
 
           <div class="pub-card reveal" data-slides='["assets/posts/pedagogie-bon-sens.jpg"]'>
             <img class="pub-card-img" src="assets/posts/pedagogie-bon-sens.jpg" alt="L'IA a-t-elle du bon sens ?" loading="lazy">
@@ -898,12 +864,60 @@
             </div>
           </div>
 
+          <div class="pub-card pub-extra reveal" data-slides='["assets/posts/pedagogie-ia-souveraine.jpg"]'>
+            <img class="pub-card-img" src="assets/posts/pedagogie-ia-souveraine.jpg" alt="L'IA souveraine, c'est quoi ?" loading="lazy">
+            <div class="pub-card-body">
+              <span class="pub-badge">Pédagogie IA</span>
+              <h3>L'IA souveraine, c'est quoi ?</h3>
+              <p class="pub-card-desc">Une IA dont les données restent en France ou en Europe. Ce n'est pas du patriotisme : c'est garder le contrôle de vos données d'entreprise.</p>
+            </div>
+          </div>
+
+          <div class="pub-card pub-extra reveal" data-slides='["assets/posts/pedagogie-agent-ia.jpg"]'>
+            <img class="pub-card-img" src="assets/posts/pedagogie-agent-ia.jpg" alt="C'est quoi un agent IA ?" loading="lazy">
+            <div class="pub-card-body">
+              <span class="pub-badge">Pédagogie IA</span>
+              <h3>C'est quoi un agent IA ?</h3>
+              <p class="pub-card-desc">La différence entre une IA qui répond et un agent qui agit. En 3 temps : vous donnez un objectif, il découpe la mission, il exécute seul.</p>
+            </div>
+          </div>
+
+          <div class="pub-card pub-extra reveal" data-slides='["assets/posts/pedagogie-3-erreurs.jpg"]'>
+            <img class="pub-card-img" src="assets/posts/pedagogie-3-erreurs.jpg" alt="3 erreurs que tout le monde fait avec l'IA" loading="lazy">
+            <div class="pub-card-body">
+              <span class="pub-badge">Erreurs courantes</span>
+              <h3>3 erreurs que tout le monde fait avec l'IA</h3>
+              <p class="pub-card-desc">Lui faire confiance les yeux fermés, poser des questions de 3 mots, abandonner après la première réponse. Et comment les éviter.</p>
+            </div>
+          </div>
+
+          <div class="pub-card pub-extra reveal" data-slides='["assets/posts/pedagogie-emplois.jpg"]'>
+            <img class="pub-card-img" src="assets/posts/pedagogie-emplois.jpg" alt="L'IA va-t-elle vraiment supprimer des emplois ?" loading="lazy">
+            <div class="pub-card-body">
+              <span class="pub-badge">Prise de position</span>
+              <h3>L'IA va-t-elle vraiment supprimer des emplois ?</h3>
+              <p class="pub-card-desc">La réponse honnête, ni catastrophiste ni naïve. Ce qui disparaît, ce qui se transforme, ce qui se crée. Le vrai risque : ne pas apprendre à travailler avec l'IA.</p>
+            </div>
+          </div>
+
+          <div class="pub-card pub-extra reveal" data-slides='["assets/posts/pedagogie-prompt.jpg"]'>
+            <img class="pub-card-img" src="assets/posts/pedagogie-prompt.jpg" alt="Le prompt : comment bien parler à une IA ?" loading="lazy">
+            <div class="pub-card-body">
+              <span class="pub-badge">Pédagogie IA</span>
+              <h3>Le prompt : comment bien parler à une IA ?</h3>
+              <p class="pub-card-desc">5 règles essentielles pour obtenir des résultats utiles de ChatGPT, Gemini ou Claude. Soyez précis, donnez le contexte, précisez la forme, donnez un rôle, itérez.</p>
+            </div>
+          </div>
+
+        </div>
+        <div class="pub-voir-plus">
+          <button class="btn-voir-plus" onclick="toggleExtra('pedagogie', this)">Voir plus</button>
         </div>
       </div>
 
       <!-- NEWS DE LA SEMAINE -->
       <div class="pub-panel" id="panel-news">
-        <div class="pub-grid">
+        <div class="pub-grid" id="grid-news">
 
           <div class="pub-card reveal" data-slides='["assets/posts/news-22juin-1.jpg","assets/posts/news-22juin-2.jpg"]'>
             <img class="pub-card-img" src="assets/posts/news-22juin-1.jpg" alt="News IA — Semaine du 22 juin 2026" loading="lazy">
@@ -918,7 +932,7 @@
             </div>
           </div>
 
-          <div class="pub-card reveal" data-slides='["assets/posts/news-15juin-1.jpg","assets/posts/news-15juin-2.jpg"]'>
+          <div class="pub-card pub-extra reveal" data-slides='["assets/posts/news-15juin-1.jpg","assets/posts/news-15juin-2.jpg"]'>
             <img class="pub-card-img" src="assets/posts/news-15juin-1.jpg" alt="News IA — Semaine du 15 juin 2026" loading="lazy">
             <div class="pub-card-body">
               <span class="pub-badge news">⚡ Semaine du 15 juin 2026</span>
@@ -931,7 +945,7 @@
             </div>
           </div>
 
-          <div class="pub-card reveal" data-slides='["assets/posts/news-08juin-1.jpg","assets/posts/news-08juin-2.jpg"]'>
+          <div class="pub-card pub-extra reveal" data-slides='["assets/posts/news-08juin-1.jpg","assets/posts/news-08juin-2.jpg"]'>
             <img class="pub-card-img" src="assets/posts/news-08juin-1.jpg" alt="News IA — Semaine du 8 juin 2026" loading="lazy">
             <div class="pub-card-body">
               <span class="pub-badge news">⚡ Semaine du 8 juin 2026</span>
@@ -944,7 +958,7 @@
             </div>
           </div>
 
-          <div class="pub-card text-only reveal" data-text="true">
+          <div class="pub-card text-only pub-extra reveal" data-text="true">
             <div class="pub-card-body">
               <span class="pub-badge news">⚡ 5 juin 2026</span>
               <ul class="news-items">
@@ -955,7 +969,7 @@
             </div>
           </div>
 
-          <div class="pub-card reveal" data-slides='["assets/posts/news-26mai-1.jpg","assets/posts/news-26mai-2.jpg"]'>
+          <div class="pub-card pub-extra reveal" data-slides='["assets/posts/news-26mai-1.jpg","assets/posts/news-26mai-2.jpg"]'>
             <img class="pub-card-img" src="assets/posts/news-26mai-1.jpg" alt="News IA — Semaine du 26 mai 2026" loading="lazy">
             <div class="pub-card-body">
               <span class="pub-badge news">⚡ Semaine du 26 mai 2026</span>
@@ -968,6 +982,9 @@
             </div>
           </div>
 
+        </div>
+        <div class="pub-voir-plus">
+          <button class="btn-voir-plus" onclick="toggleExtra('news', this)">Voir plus</button>
         </div>
       </div>
 
@@ -1185,6 +1202,19 @@
       if (e.key === 'Escape') closeLightbox();
     });
   })();
+
+  // Voir plus / Voir moins
+  function toggleExtra(panelId, btn) {
+    var grid = document.getElementById('grid-' + panelId);
+    var extras = grid.querySelectorAll('.pub-extra');
+    var expanded = btn.dataset.expanded === 'true';
+    extras.forEach(function(el) { el.style.display = expanded ? 'none' : 'block'; });
+    btn.textContent = expanded ? 'Voir plus' : 'Voir moins';
+    btn.dataset.expanded = expanded ? 'false' : 'true';
+    if (expanded) {
+      document.getElementById('panel-' + panelId).scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
 
   // Onglets publications
   function switchTab(tabName, btn) {
