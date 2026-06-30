@@ -648,6 +648,33 @@
     .lightbox-inner { flex-direction: column; max-height: 85vh; overflow-y: auto; gap: 1rem; }
     .lightbox-inner img { max-height: none; max-width: 100%; width: 100%; }
   }
+  .lightbox-text {
+    max-width: 620px; width: 100%;
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 2rem 2rem 2.5rem;
+    max-height: 85vh; overflow-y: auto;
+  }
+  .lightbox-text h3 {
+    font-family: var(--font-display); font-size: 1.1rem; font-weight: 700;
+    color: var(--ink); margin: 1.5rem 0 0.5rem;
+  }
+  .lightbox-text h3:first-child { margin-top: 0; }
+  .lightbox-text p {
+    color: var(--ink-soft); font-size: 0.92rem; line-height: 1.7; margin: 0.4rem 0;
+  }
+  .lightbox-text .lb-arrow {
+    color: var(--cyan-bright); font-weight: 600; font-size: 0.9rem;
+    display: block; margin-top: 0.5rem;
+  }
+  .lightbox-text .lb-detail {
+    margin-top: 1.5rem; padding: 1rem 1.25rem;
+    background: rgba(67, 224, 230, 0.05);
+    border-left: 2px solid var(--cyan);
+    border-radius: 0 8px 8px 0;
+    color: var(--ink-soft); font-size: 0.88rem; line-height: 1.6;
+  }
   .lightbox-close {
     position: fixed; top: 1.25rem; right: 1.25rem;
     background: rgba(255,255,255,0.1); border: none;
@@ -917,7 +944,7 @@
             </div>
           </div>
 
-          <div class="pub-card text-only reveal">
+          <div class="pub-card text-only reveal" data-text="true">
             <div class="pub-card-body">
               <span class="pub-badge news">⚡ 5 juin 2026</span>
               <ul class="news-items">
@@ -1129,6 +1156,24 @@
     document.querySelectorAll('.pub-card[data-slides]').forEach(function(card) {
       card.addEventListener('click', function() {
         openLightbox(JSON.parse(card.dataset.slides));
+      });
+    });
+
+    document.querySelectorAll('.pub-card[data-text]').forEach(function(card) {
+      card.addEventListener('click', function() {
+        inner.innerHTML = '<div class="lightbox-text">'
+          + '<h3>🏗️ La France devient un géant mondial de l\'IA</h3>'
+          + '<p>SoftBank vient d\'annoncer 75 milliards d\'euros investis en France pour construire des data centers IA dans les Hauts-de-France. C\'est le plus grand investissement IA jamais annoncé en Europe.</p>'
+          + '<p>Pourquoi la France ? Notre électricité nucléaire, décarbonée à 95 %, est un avantage compétitif énorme pour des infrastructures aussi énergivores. Macron a personnellement bataillé pour convaincre Masayoshi Son, le patron de SoftBank.</p>'
+          + '<span class="lb-arrow">→ Pour les entreprises françaises, c\'est un signal clair : l\'IA va s\'accélérer ici, pas dans 5 ans.</span>'
+          + '<h3>🧮 Une IA résout un problème de maths vieux de 80 ans</h3>'
+          + '<p>En 1946, le mathématicien Paul Erdős pose un problème de géométrie apparemment simple. Les meilleurs cerveaux du monde planèrent dessus pendant 8 décennies. Sans succès.</p>'
+          + '<p>Cette semaine, un modèle OpenAI l\'a résolu seul, sans être spécialisé en maths. 9 mathématiciens ont relu et validé la preuve. L\'un d\'eux, médaillé Fields, a déclaré qu\'il la publierait sans hésiter dans la plus grande revue scientifique du monde.</p>'
+          + '<span class="lb-arrow">→ L\'IA ne se contente plus d\'assister les chercheurs. Elle fait des découvertes que l\'humain n\'avait pas réussi à faire.</span>'
+          + '<div class="lb-detail">✨ <strong>Le détail qui fait sourire :</strong> Erdős avait promis 500 $ à qui résoudrait son problème. Une IA l\'a fait. Mais une IA ne peut pas toucher un chèque.</div>'
+          + '</div>';
+        lb.classList.add('open');
+        document.body.style.overflow = 'hidden';
       });
     });
 
