@@ -538,25 +538,25 @@
   .publications { padding-block: var(--section-y); }
   .pub-intro { max-width: 640px; }
   .pub-intro p { color: var(--ink-soft); margin-top: 0.75rem; }
-  .pub-tabs {
-    display: flex; gap: 0;
+  .pub-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+  @media (max-width: 900px) {
+    .pub-columns { grid-template-columns: 1fr; gap: 3.5rem; }
+  }
+  .pub-column-title {
+    font-family: var(--font-display);
+    font-size: 1.05rem; font-weight: 600;
+    color: var(--ink); margin: 0 0 1.5rem;
+    padding-bottom: 0.75rem;
     border-bottom: 1px solid var(--line);
-    margin-bottom: 2.5rem;
   }
-  .pub-tab {
-    background: none; border: none;
-    color: var(--ink-mute);
-    font-family: var(--font-display); font-size: 0.95rem; font-weight: 500;
-    padding: 0.75rem 1.5rem;
-    cursor: pointer;
-    border-bottom: 2px solid transparent;
-    margin-bottom: -1px;
-    transition: color 0.2s, border-color 0.2s;
+  .pub-column .pub-grid {
+    grid-template-columns: 1fr;
   }
-  .pub-tab:hover { color: var(--ink); }
-  .pub-tab.active { color: var(--cyan-bright); border-bottom-color: var(--cyan-bright); }
-  .pub-panel { display: none; }
-  .pub-panel.active { display: block; }
   .pub-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -854,13 +854,11 @@
         <p>Chaque mardi, un concept IA expliqué simplement. Chaque vendredi, les actualités de la semaine.</p>
       </div>
 
-      <div class="pub-tabs">
-        <button class="pub-tab active" onclick="switchTab('pedagogie', this)">📚 Pédagogie IA</button>
-        <button class="pub-tab" onclick="switchTab('news', this)">⚡ News de la semaine</button>
-      </div>
+      <div class="pub-columns">
 
       <!-- PÉDAGOGIE IA -->
-      <div class="pub-panel active" id="panel-pedagogie">
+      <div class="pub-column" id="panel-pedagogie">
+        <h3 class="pub-column-title">📚 Pédagogie IA</h3>
         <div class="pub-grid" id="grid-pedagogie">
 
           <div class="pub-card reveal" data-slides='["assets/posts/pedagogie-bon-sens.jpg"]'>
@@ -930,7 +928,8 @@
       </div>
 
       <!-- NEWS DE LA SEMAINE -->
-      <div class="pub-panel" id="panel-news">
+      <div class="pub-column" id="panel-news">
+        <h3 class="pub-column-title">⚡ News de la semaine</h3>
         <div class="pub-grid" id="grid-news">
 
           <div class="pub-card reveal" data-slides='["assets/posts/news-29juin-1.jpg","assets/posts/news-29juin-2.jpg"]'>
@@ -1020,6 +1019,8 @@
           <button class="btn-voir-plus" onclick="toggleExtra('news', this)">Voir plus</button>
         </div>
       </div>
+
+      </div><!-- /pub-columns -->
 
     </div>
   </section>
