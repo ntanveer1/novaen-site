@@ -528,10 +528,41 @@
   .form-success {
     display: none;
     padding: 2rem 1rem;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+  }
+  .form-success p {
     color: var(--cyan-bright);
     font-family: var(--font-display);
     font-size: 1.15rem;
     font-weight: 600;
+    margin: 0;
+  }
+  .checkmark-svg { width: 72px; height: 72px; }
+  .checkmark-circle {
+    stroke: var(--cyan-bright);
+    stroke-width: 2;
+    fill: none;
+    stroke-dasharray: 157;
+    stroke-dashoffset: 157;
+    animation: draw-circle 0.5s ease forwards;
+  }
+  .checkmark-check {
+    stroke: var(--cyan-bright);
+    stroke-width: 3;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 48;
+    stroke-dashoffset: 48;
+    animation: draw-check 0.35s ease forwards 0.5s;
+  }
+  @keyframes draw-circle {
+    to { stroke-dashoffset: 0; }
+  }
+  @keyframes draw-check {
+    to { stroke-dashoffset: 0; }
   }
 
   /* Publications */
@@ -1082,7 +1113,11 @@
         </form>
 
         <div class="form-success" id="form-success">
-          Merci — on vous répond sous 24h.
+          <svg class="checkmark-svg" viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
+            <circle class="checkmark-circle" cx="26" cy="26" r="25"/>
+            <path class="checkmark-check" d="M14 27 l8 8 l16-16"/>
+          </svg>
+          <p>Merci, on vous répond sous 24h.</p>
         </div>
       </div>
     </div>
@@ -1280,7 +1315,7 @@
     })
     .then(function() {
       form.style.display = 'none';
-      document.getElementById('form-success').style.display = 'block';
+      document.getElementById('form-success').style.display = 'flex';
     })
     .catch(function() {
       alert('Une erreur est survenue. Contactez-nous à ctn@novaen.fr');
