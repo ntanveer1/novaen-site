@@ -169,44 +169,57 @@
   }
   .tl-type.news { color: #f59e0b; }
 
+  /* Dot injecté par JS */
+  .tl-dot-wrap { position: absolute; top: 0.15rem; z-index: 2; }
+  .tl-dot {
+    display: block;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    transition: transform 0.2s ease;
+  }
+  .tl-item.tl-pedagogie .tl-dot { background: var(--cyan); box-shadow: 0 0 8px 3px rgba(37,186,192,0.45); }
+  .tl-item.tl-news .tl-dot { background: #f59e0b; box-shadow: 0 0 8px 3px rgba(245,158,11,0.45); }
+  .tl-dot-date {
+    position: absolute;
+    top: 50%;
+    white-space: nowrap;
+    font-family: var(--font-display);
+    font-size: 0.67rem; font-weight: 500; letter-spacing: 0.02em;
+    color: var(--ink-mute);
+    background: rgba(10, 34, 40, 0.92);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 0.18rem 0.6rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+  .tl-item:hover .tl-dot { transform: scale(1.45); }
+  .tl-item:hover .tl-dot-date { opacity: 1; }
+
   @media (min-width: 700px) {
     .tl-item { width: calc(50% - 2rem); }
     .tl-item.tl-left { margin-right: auto; }
     .tl-item.tl-right { margin-left: auto; }
-
-    .tl-item::after {
-      content: "";
-      position: absolute;
-      top: 0.15rem;
-      width: 10px; height: 10px;
-      border-radius: 50%;
-      z-index: 1;
+    .tl-item.tl-left .tl-dot-wrap { right: -2rem; transform: translateX(50%); }
+    .tl-item.tl-right .tl-dot-wrap { left: -2rem; transform: translateX(-50%); }
+    .tl-item.tl-left .tl-dot-date {
+      left: calc(100% + 0.65rem);
+      transform: translateY(-50%) translateX(-5px);
     }
-    .tl-item.tl-pedagogie::after {
-      background: var(--cyan);
-      box-shadow: 0 0 8px 3px rgba(37,186,192,0.45);
+    .tl-item.tl-right .tl-dot-date {
+      right: calc(100% + 0.65rem);
+      transform: translateY(-50%) translateX(5px);
     }
-    .tl-item.tl-news::after {
-      background: #f59e0b;
-      box-shadow: 0 0 8px 3px rgba(245,158,11,0.45);
-    }
-    .tl-item.tl-left::after { right: -2rem; transform: translateX(50%); }
-    .tl-item.tl-right::after { left: -2rem; transform: translateX(-50%); }
+    .tl-item.tl-left:hover .tl-dot-date { transform: translateY(-50%) translateX(0); }
+    .tl-item.tl-right:hover .tl-dot-date { transform: translateY(-50%) translateX(0); }
   }
 
   @media (max-width: 699px) {
     .timeline { border-left: 1px solid rgba(37,186,192,0.22); padding-left: 1.5rem; }
     .tl-item { margin-bottom: 3rem; }
-    .tl-item::after {
-      content: "";
-      position: absolute;
-      left: -1.75rem;
-      top: 0.15rem;
-      width: 9px; height: 9px;
-      border-radius: 50%;
-    }
-    .tl-item.tl-pedagogie::after { background: var(--cyan); }
-    .tl-item.tl-news::after { background: #f59e0b; }
+    .tl-dot-wrap { left: -1.75rem; transform: translateX(-50%); }
+    .tl-dot-date { display: none; }
   }
 
   /* Cards */
@@ -619,6 +632,24 @@
 </footer>
 
 <script>
+  // Dots timeline avec date au survol
+  document.querySelectorAll('.tl-item').forEach(function(item) {
+    var timeEl = item.querySelector('time.pub-date');
+    var dateText = timeEl ? timeEl.textContent.trim() : '';
+    var wrap = document.createElement('div');
+    wrap.className = 'tl-dot-wrap';
+    var dot = document.createElement('span');
+    dot.className = 'tl-dot';
+    wrap.appendChild(dot);
+    if (dateText) {
+      var label = document.createElement('span');
+      label.className = 'tl-dot-date';
+      label.textContent = dateText;
+      wrap.appendChild(label);
+    }
+    item.appendChild(wrap);
+  });
+
   // Curseur
   if (window.matchMedia('(pointer: fine)').matches) {
     var dot = document.getElementById('cursor-dot');
