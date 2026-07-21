@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4514J1JDS3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-4514J1JDS3');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Publications NOVAËN : pédagogie IA et news de la semaine</title>
+<meta name="description" content="Chaque mardi, un concept IA expliqué simplement. Chaque vendredi, les actualités IA de la semaine. Par NOVAËN, agence IA pour TPE et PME à Paris.">
+<link rel="canonical" href="https://www.novaen.fr/publications/" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --violet: #320972;
+    --violet-soft: #4a1a9e;
+    --marine: #0e2b31;
+    --marine-deep: #081e22;
+    --cyan: #25bac0;
+    --cyan-bright: #43e0e6;
+    --bg: #07191c;
+    --bg-2: #0a2228;
+    --ink: #f4f8f8;
+    --ink-soft: #b9cbcb;
+    --ink-mute: #7e9596;
+    --line: rgba(37, 186, 192, 0.18);
+    --line-soft: rgba(255, 255, 255, 0.07);
+    --font-display: "Space Grotesk", system-ui, sans-serif;
+    --font-body: "Inter", system-ui, sans-serif;
+    --maxw: 1200px;
+    --pad-x: clamp(1.25rem, 5vw, 4rem);
+    --section-y: clamp(5rem, 12vh, 9rem);
+    --radius: 18px;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: "";
+    position: fixed; inset: 0; z-index: -2;
+    background:
+      radial-gradient(60% 50% at 78% -5%, rgba(50, 9, 114, 0.55), transparent 60%),
+      radial-gradient(55% 45% at 8% 12%, rgba(37, 186, 192, 0.12), transparent 55%),
+      linear-gradient(180deg, var(--marine-deep), var(--bg) 40%);
+  }
+  body::after {
+    content: "";
+    position: fixed; inset: 0; z-index: -1; pointer-events: none;
+    background-image:
+      linear-gradient(var(--line-soft) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(120% 90% at 50% 0%, #000 30%, transparent 78%);
+    -webkit-mask-image: radial-gradient(120% 90% at 50% 0%, #000 30%, transparent 78%);
+    opacity: 0.6;
+  }
+
+  a { color: inherit; text-decoration: none; }
+  .wrap { width: 100%; max-width: var(--maxw); margin-inline: auto; padding-inline: var(--pad-x); }
+  h1, h2, h3 { font-family: var(--font-display); font-weight: 600; line-height: 1.05; letter-spacing: -0.02em; margin: 0; text-wrap: balance; }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    font-family: var(--font-display); font-size: 0.8rem; font-weight: 500;
+    letter-spacing: 0.22em; text-transform: uppercase; color: var(--cyan);
+  }
+  .eyebrow::before { content: ""; width: 26px; height: 1px; background: var(--cyan); opacity: 0.7; }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.65rem;
+    font-family: var(--font-display); font-weight: 600; font-size: 1rem;
+    letter-spacing: 0.01em; padding: 0.95rem 1.7rem;
+    border-radius: 999px; border: 1px solid transparent; cursor: pointer;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+  }
+  .btn .arrow { transition: transform 0.25s ease; }
+  .btn:hover .arrow { transform: translateX(4px); }
+  .btn-ghost {
+    color: var(--ink);
+    border-color: rgba(255,255,255,0.14);
+    background: linear-gradient(145deg, rgba(255,255,255,0.09), rgba(255,255,255,0.03));
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.14), 0 2px 8px rgba(0,0,0,0.12);
+    position: relative; overflow: hidden;
+  }
+  .btn-ghost::before {
+    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 50%;
+    background: linear-gradient(180deg, rgba(255,255,255,0.12), transparent);
+    border-radius: inherit; pointer-events: none;
+  }
+  .btn-ghost:hover { border-color: rgba(37,186,192,0.5); color: var(--cyan-bright); transform: translateY(-2px); }
+  :focus-visible { outline: 2px solid var(--cyan-bright); outline-offset: 3px; border-radius: 6px; }
+
+  /* Header */
+  header.site {
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: blur(28px) saturate(200%); -webkit-backdrop-filter: blur(28px) saturate(200%);
+    background: rgba(7, 25, 28, 0.48);
+    border-bottom: 1px solid rgba(37, 186, 192, 0.1);
+    box-shadow: 0 1px 0 rgba(255,255,255,0.05), 0 8px 32px rgba(0,0,0,0.3);
+  }
+  .nav { display: flex; align-items: center; justify-content: space-between; height: 96px; }
+  .brand { display: inline-flex; align-items: center; }
+  .brand img { height: 64px; width: auto; display: block; }
+  .nav-links { display: none; gap: 2rem; font-size: 0.95rem; color: rgba(244,248,248,0.72); font-weight: 500; position: relative; }
+  .nav-links a:hover { color: var(--cyan-bright); }
+  .nav-links a { position: relative; z-index: 1; padding: 0.35rem 0.85rem; border-radius: 999px; transition: color 0.25s ease; }
+  .nav-links a.active { color: #fff; }
+  .nav .btn { padding: 0.6rem 1.2rem; font-size: 0.9rem; }
+  header.site .btn-ghost {
+    color: #fff;
+    background: linear-gradient(145deg, rgba(50,9,114,0.65), rgba(50,9,114,0.35));
+    border-color: rgba(255,255,255,0.2);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.25), 0 4px 18px rgba(50,9,114,0.4);
+  }
+  header.site .btn-ghost:hover { background: linear-gradient(145deg, rgba(65,18,140,0.75), rgba(50,9,114,0.5)); color: #fff; border-color: rgba(255,255,255,0.28); transform: translateY(-2px); }
+  @media (min-width: 860px) { .nav-links { display: flex; } }
+
+  /* Page hero */
+  .page-hero { padding-top: clamp(3.5rem, 8vh, 6rem); padding-bottom: clamp(2.5rem, 5vh, 4rem); }
+  .page-hero h1 { font-size: clamp(2rem, 1.2rem + 3.5vw, 3.5rem); font-weight: 700; margin-top: 1rem; }
+  .page-hero h1 .hl { color: var(--cyan-bright); }
+  .page-hero p { margin-top: 1rem; color: var(--ink-soft); max-width: 52ch; }
+
+  /* Publications */
+  .publications { padding-block: clamp(2rem, 5vh, 4rem) var(--section-y); }
+  .pub-columns {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start;
+  }
+  @media (max-width: 900px) { .pub-columns { grid-template-columns: 1fr; gap: 3.5rem; } }
+  .pub-column-title {
+    font-family: var(--font-display); font-size: 1.05rem; font-weight: 600;
+    color: var(--ink); margin: 0 0 1.5rem;
+    padding-bottom: 0.75rem; border-bottom: 1px solid var(--line);
+  }
+  .pub-column .pub-grid { grid-template-columns: 1fr; }
+  .pub-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  @media (max-width: 900px) { .pub-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px) { .pub-grid { grid-template-columns: 1fr; } }
+  .pub-card {
+    background: var(--bg-2); border: 1px solid var(--line);
+    border-radius: 16px; overflow: hidden; cursor: pointer;
+    transition: border-color 0.25s, transform 0.25s;
+  }
+  .pub-card:hover { border-color: var(--cyan); transform: translateY(-4px); }
+  .pub-card-img { width: 100%; display: block; height: 220px; object-fit: cover; object-position: top; }
+  .pub-card-body { padding: 1.25rem 1.25rem 1.5rem; }
+  .pub-badge {
+    display: inline-block; font-size: 0.63rem; font-weight: 700;
+    letter-spacing: 0.09em; text-transform: uppercase; color: var(--cyan-bright);
+    background: rgba(67, 224, 230, 0.08); border: 1px solid rgba(67, 224, 230, 0.2);
+    border-radius: 6px; padding: 0.18rem 0.55rem; margin-bottom: 0.7rem;
+  }
+  .pub-badge.news { color: #f59e0b; background: rgba(245, 158, 11, 0.08); border-color: rgba(245, 158, 11, 0.2); }
+  .pub-date { display: block; font-size: 0.76rem; color: var(--ink-mute); font-family: var(--font-display); margin-top: 0.35rem; margin-bottom: 0.55rem; }
+  .pub-card h3 { font-size: 1rem; font-weight: 600; color: var(--ink); line-height: 1.4; margin-bottom: 0.45rem; }
+  .pub-card-desc { font-size: 0.84rem; color: var(--ink-soft); line-height: 1.6; }
+  .news-items { list-style: none; padding: 0; margin: 0.6rem 0 0; display: flex; flex-direction: column; gap: 0.55rem; }
+  .news-item { font-size: 0.82rem; color: var(--ink-soft); padding-left: 1rem; position: relative; line-height: 1.45; }
+  .news-item::before { content: '→'; position: absolute; left: 0; color: var(--cyan); }
+  .news-focus { margin-top: 0.9rem; padding: 0.5rem 0.75rem; background: rgba(67, 224, 230, 0.05); border-left: 2px solid var(--cyan); border-radius: 0 6px 6px 0; font-size: 0.78rem; color: var(--ink-soft); }
+  .news-focus strong { color: var(--cyan-bright); font-weight: 600; }
+  .pub-card.text-only .pub-card-body { padding: 1.5rem; }
+  .pub-extra { display: none; }
+  .pub-voir-plus { display: flex; justify-content: center; margin-top: 2rem; }
+  .btn-voir-plus {
+    background: none; border: 1px solid var(--line); color: var(--ink-soft);
+    font-family: var(--font-display); font-size: 0.9rem; font-weight: 500;
+    padding: 0.65rem 2rem; border-radius: 99px; cursor: pointer; transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-voir-plus:hover { border-color: var(--cyan); color: var(--cyan-bright); }
+
+  /* Lightbox */
+  .lightbox {
+    display: none; position: fixed; inset: 0; z-index: 1000;
+    background: rgba(7, 25, 28, 0.92); backdrop-filter: blur(8px);
+    align-items: center; justify-content: center; padding: 1.5rem;
+  }
+  .lightbox.open { display: flex; }
+  .lightbox-inner { position: relative; max-width: 95vw; display: flex; flex-direction: row; gap: 1.5rem; align-items: flex-start; }
+  .lightbox-inner img { display: block; max-height: 85vh; width: auto; max-width: 520px; object-fit: contain; border-radius: 12px; }
+  @media (max-width: 700px) {
+    .lightbox-inner { flex-direction: column; max-height: 85vh; overflow-y: auto; gap: 1rem; }
+    .lightbox-inner img { max-height: none; max-width: 100%; width: 100%; }
+  }
+  .lightbox-text {
+    max-width: 620px; width: 100%; background: var(--bg-2); border: 1px solid var(--line);
+    border-radius: 16px; padding: 2rem 2rem 2.5rem; max-height: 85vh; overflow-y: auto;
+  }
+  .lightbox-text h3 { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; color: var(--ink); margin: 1.5rem 0 0.5rem; }
+  .lightbox-text h3:first-child { margin-top: 0; }
+  .lightbox-text p { color: var(--ink-soft); font-size: 0.92rem; line-height: 1.7; margin: 0.4rem 0; }
+  .lightbox-text .lb-arrow { color: var(--cyan-bright); font-weight: 600; font-size: 0.9rem; display: block; margin-top: 0.5rem; }
+  .lightbox-text .lb-detail { margin-top: 1.5rem; padding: 1rem 1.25rem; background: rgba(67, 224, 230, 0.05); border-left: 2px solid var(--cyan); border-radius: 0 8px 8px 0; color: var(--ink-soft); font-size: 0.88rem; line-height: 1.6; }
+  .lightbox-close {
+    position: fixed; top: 1.25rem; right: 1.25rem;
+    background: rgba(255,255,255,0.1); border: none; color: var(--ink); font-size: 1.4rem;
+    width: 40px; height: 40px; border-radius: 50%; cursor: pointer;
+    display: flex; align-items: center; justify-content: center; transition: background 0.2s;
+  }
+  .lightbox-close:hover { background: rgba(255,255,255,0.2); }
+
+  /* Cursor */
+  @media (pointer: fine) {
+    body, a, button { cursor: none; }
+    .cursor-dot {
+      position: fixed; width: 7px; height: 7px; background: var(--cyan-bright);
+      border-radius: 50%; pointer-events: none; z-index: 9999; top: 0; left: 0;
+      transform: translate(-50%, -50%); box-shadow: 0 0 8px 2px rgba(67, 224, 230, 0.6);
+      transition: width 0.2s, height 0.2s;
+    }
+    .cursor-ring {
+      position: fixed; width: 30px; height: 30px; border: 1.5px solid rgba(37, 186, 192, 0.5);
+      border-radius: 50%; pointer-events: none; z-index: 9998; top: 0; left: 0;
+      transform: translate(-50%, -50%); transition: width 0.25s ease, height 0.25s ease, border-color 0.25s ease;
+    }
+    .cursor-dot.hover { width: 10px; height: 10px; }
+    .cursor-ring.hover { width: 46px; height: 46px; border-color: rgba(67, 224, 230, 0.75); }
+  }
+
+  /* Reveal */
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      .reveal { opacity: 0; transform: translateY(26px); animation: reveal-in linear both; animation-timeline: view(); animation-range: entry 5% cover 26%; }
+    }
+  }
+  @keyframes reveal-in { to { opacity: 1; transform: translateY(0); } }
+
+  /* Footer */
+  footer.site { border-top: 1px solid var(--line-soft); padding-block: clamp(3rem, 6vh, 4.5rem); margin-top: var(--section-y); }
+  .foot { display: grid; gap: 2rem; }
+  @media (min-width: 720px) { .foot { grid-template-columns: 1fr auto; align-items: end; } }
+  .foot .brand img { height: 72px; }
+  .foot .tag { color: var(--ink-mute); margin-top: 0.6rem; font-size: 0.95rem; max-width: 40ch; }
+  .foot-right { display: flex; flex-direction: column; gap: 0.6rem; }
+  .foot-right .city { color: var(--ink-mute); font-size: 0.9rem; letter-spacing: 0.05em; text-transform: uppercase; font-family: var(--font-display); }
+  .foot-right a.mail { font-family: var(--font-display); font-weight: 600; font-size: 1.15rem; color: var(--ink); }
+  .foot-right a.mail:hover { color: var(--cyan-bright); }
+  .foot-bottom { margin-top: 2.6rem; padding-top: 1.6rem; border-top: 1px solid var(--line-soft); display: flex; flex-wrap: wrap; gap: 0.6rem 1.5rem; justify-content: space-between; color: var(--ink-mute); font-size: 0.85rem; }
+</style>
+</head>
+<body>
+
+<div class="cursor-dot" id="cursor-dot"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+
+<header class="site">
+  <nav class="nav wrap" aria-label="Navigation principale">
+    <a class="brand" href="/" aria-label="NOVAËN, accueil"><img src="../assets/novaen-logo-light.svg" alt="NOVAËN, From Spark To The Star"></a>
+    <div class="nav-links">
+      <a href="/#contexte">Contexte</a>
+      <a href="/#services">Services</a>
+      <a href="/#pourquoi">Pourquoi nous</a>
+      <a href="/publications/" class="active">Publications</a>
+    </div>
+    <a class="btn btn-ghost" href="/#contact">Prendre contact</a>
+  </nav>
+</header>
+
+<main>
+
+  <div class="page-hero wrap">
+    <span class="eyebrow">LinkedIn</span>
+    <h1>Nos <span class="hl">publications</span></h1>
+    <p>Chaque mardi, un concept IA expliqué simplement. Chaque vendredi, les actualités de la semaine.</p>
+  </div>
+
+  <section class="publications">
+    <div class="wrap">
+      <div class="pub-columns">
+
+        <!-- PÉDAGOGIE IA -->
+        <div class="pub-column" id="panel-pedagogie">
+          <h3 class="pub-column-title">📚 Pédagogie IA</h3>
+          <div class="pub-grid" id="grid-pedagogie">
+
+            <div class="pub-card reveal" data-slides='["../assets/posts/pedagogie-mardi-grand-pere-IA.jpg"]'>
+              <img class="pub-card-img" src="../assets/posts/pedagogie-mardi-grand-pere-IA.jpg" alt="De la télé à l'IA : une génération qui n'a jamais cessé d'apprendre" loading="lazy">
+              <div class="pub-card-body">
+                <span class="pub-badge">Histoire vraie</span>
+                <time class="pub-date">21 juillet 2026</time>
+                <h3>De la télé à l'IA : une génération qui n'a jamais cessé d'apprendre</h3>
+                <p class="pub-card-desc">De la télé au Minitel, d'Internet au smartphone, puis à l'IA. La vraie compétence, ce n'est pas de tout maîtriser. C'est de ne jamais arrêter d'apprendre.</p>
+              </div>
+            </div>
+
+            <div class="pub-card pub-extra reveal" data-slides='["../assets/posts/pedagogie-5-usages-travail.jpg"]'>
+              <img class="pub-card-img" src="../assets/posts/pedagogie-5-usages-travail.jpg" alt="5 façons d'utiliser l'IA au travail dès aujourd'hui" loading="lazy">
+              <div class="pub-card-body">
+                <span class="pub-badge">Guide pratique</span>
+                <time class="pub-date">7 juillet 2026</time>
+                <h3>5 façons d'utiliser l'IA au travail dès aujourd'hui</h3>
+                <p class="pub-card-desc">Rédiger vos mails, résumer une réunion, trouver des idées, traduire un texte pro, préparer un rendez-vous client. Pas besoin d'être expert, juste de commencer.</p>
+              </div>
+            </div>
+
+            <div class="pub-card pub-extra reveal" data-slides='["../assets/posts/pedagogie-bon-sens.jpg"]'>
+              <img class="pub-card-img" src="../assets/posts/pedagogie-bon-sens.jpg" alt="L'IA a-t-elle du bon sens ?" loading="lazy">
+              <div class="pub-card-body">
+                <span class="pub-badge">Le test qui fait réfléchir</span>
+                <time class="pub-date">30 juin 2026</time>
+                <h3>L'IA a-t-elle du bon sens ?</h3>
+                <p class="pub-card-desc">Une question simple a mis ChatGPT et Copilot en échec, quand Gemini a trouvé la bonne réponse. L'IA suit la logique, pas toujours le bon sens.</p>
+              </div>
+            </div>
+
+            <div class="pub-card pub-extra reveal" data-slides='["../assets/posts/pedagogie-ia-souveraine.jpg"]'>
+              <img class="pub-card-img" src="../assets/posts/pedagogie-ia-souveraine.jpg" alt="L'IA souveraine, c'est quoi ?" loading="lazy">
+              <div class="pub-card-body">
+                <span class="pub-badge">Pédagogie IA</span>
+                <time class="pub-date">23 juin 2026</time>
+                <h3>L'IA souveraine, c'est quoi ?</h3>
+                <p class="pub-card-desc">Une IA dont les données restent en France ou en Europe. Ce n'est pas du patriotisme : c'est garder le contrôle de vos données d'entreprise.</p>
+              </div>
+            </div>
+
+            <div class="pub-card pub-extra reveal" data-slides='["../assets/posts/pedagogie-agent-ia.jpg"]'>
+              <img class="pub-card-img" src="../assets/posts/pedagogie-agent-ia.jpg" alt="C'est quoi un agent IA ?" loading="lazy">
+              <div class="pub-card-body">
+                <span class="pub-badge">Pédagogie IA</span>
+                <time class="pub-date">16 juin 2026</time>
+                <h3>C'est quoi un agent IA ?</h3>
+                <p class="pub-card-desc">La différence entre une IA qui répond et un agent qui agit. En 3 temps : vous donnez un objectif, il découpe la mission, il exécute seul.</p>
+              </div>
+            </div>
+
+            <div class="pub-card pub-extra reveal" data-slides='["../assets/posts/pedagogie-3-erreurs.jpg"]'>
+              <img class="pub-card-img" src="../assets/posts/pedagogie-3-erreurs.jpg" alt="3 erreurs que tout le monde fait avec l'IA" loading="lazy">
+              <div class="pub-card-body">
+                <span class="pub-badge">Erreurs courantes</span>
+                <time class="pub-date">9 juin 2026</time>
+                <h3>3 erreurs que tout le monde fait avec l'IA</h3>
+                <p class="pub-card-desc">Lui faire confiance les yeux fermés, poser des questions de 3 mots, abandonner après la première réponse. Et comment les éviter.</p>
+              </div>
+            </div>
+
+            <div class="pub-card pub-extra reveal" data-slides='["../assets/posts/pedagogie-emplois.jpg"]'>
+              <img class="pub-card-img" src="../assets/posts/pedagogie-emplois.jpg" alt="L'IA va-t-elle vraiment supprimer des emplois ?" loading="lazy">
+              <div class="pub-card-body">
+                <span class="pub-badge">Prise de position</span>
+                <time class="pub-date">2 juin 2026</time>
+                <h3>L'IA va-t-elle vraiment supprimer des emplois ?</h3>
+                <p class="pub-card-desc">La réponse honnête, ni catastrophiste ni naïve. Ce qui disparaît, ce qui se transforme, ce qui se crée. Le vrai risque : ne pas apprendre à travailler avec l'IA.</p>
+              </div>
+            </div>
+
+            <div class="pub-card pub-extra reveal" data-slides='["../assets/posts/pedagogie-prompt.jpg"]'>
+              <img class="pub-card-img" src="../assets/posts/pedagogie-prompt.jpg" alt="Le prompt : comment bien parler à une IA ?" loading="lazy">
+              <div class="pub-card-body">
+                <span class="pub-badge">Pédagogie IA</span>
+                <time class="pub-date">26 mai 2026</time>
+                <h3>Le prompt : comment bien parler à une IA ?</h3>
+                <p class="pub-card-desc">5 règles essentielles pour obtenir des résultats utiles de ChatGPT, Gemini ou Claude. Soyez précis, donnez le contexte, précisez la forme, donnez un rôle, itérez.</p>
+              </div>
+            </div>
+
+          </div>
+          <div class="pub-voir-plus">
+            <button class="btn-voir-plus" onclick="toggleExtra('pedagogie', this)">Voir plus</button>
+          </div>
+        </div>
+
+        <!-- NEWS DE LA SEMAINE -->
+        <div class="pub-column" id="panel-news">
+          <h3 class="pub-column-title">⚡ News de la semaine</h3>
+          <div class="pub-grid" id="grid-news">
+
+            <div class="pub-card reveal" data-slides='["../assets/posts/news-17juillet-1.jpg","../assets/posts/news-17juillet-2.jpg"]'>
+              <img class="pub-card-img" src="../assets/posts/news-17juillet-1.jpg" alt="News IA, semaine du 13 juillet 2026" loading="lazy">
+              <div class="pub-card-body">
+                <span class="pub-badge news">⚡ Semaine du 13 juillet 2026</span>
+                <time class="pub-date">17 juillet 2026</time>
+                <ul class="news-items">
+                  <li class="news-item">Apple attaque OpenAI en justice : plus de 400 anciens salariés d'Apple ont rejoint OpenAI, accusé de débauchage et vol de secrets industriels</li>
+                  <li class="news-item">44% des utilisateurs quotidiens de l'IA constatent un gain de productivité réel, 26% déclarent en perdre (sondage québécois, juillet 2026)</li>
+                  <li class="news-item">41% des posts longs LinkedIn sont écrits par une IA, selon une étude Pangram sur plus d'1 million de posts analysés</li>
+                </ul>
+                <div class="news-focus">Focus : <strong>Pourquoi l'IA vous fait parfois perdre du temps</strong></div>
+              </div>
+            </div>
+
+            <div class="pub-card pub-extra reveal" data-slides='["../assets/posts/news-07juil-1.jpg","../assets/posts/news-07juil-2.jpg"]'>
+              <img class="pub-card-img" src="../assets/posts/news-07juil-1.jpg" alt="News IA, semaine du 6 juillet 2026" loading="lazy">
+              <div class="pub-card-body">
+                <span class="pub-badge news">⚡ Semaine du 6 juillet 2026</span>
+                <time class="pub-date">11 juillet 2026</time>
+                <ul class="news-items">
+                  <li class="news-item">Le 9 juillet, tous les géants de l'IA sortent un nouveau modèle le même jour : GPT-5.6, Grok 4.5, Claude, Gemini</li>
+                  <li class="news-item">La loi européenne sur l'IA entre en vigueur le 2 août : toutes les entreprises concernées par les nouvelles règles de transparence</li>
+                  <li class="news-item">Aux municipales, 1 électeur sur 6 a utilisé l'IA pour voter, plus les ouvriers (17%) que les cadres (13%)</li>
+                </ul>
+                <div class="news-focus">Focus : <strong>La loi IA du 2 août : votre entreprise est-elle prête ?</strong></div>
+              </div>
+            </div>
+
+            <div class="pub-card pub-extra reveal" data-slides='["../assets/posts/news-29juin-1.jpg","../assets/posts/news-29juin-2.jpg"]'>
+              <img class="pub-card-img" src="../assets/posts/news-29juin-1.jpg" alt="News IA, semaine du 29 juin 2026" loading="lazy">
+              <div class="pub-card-body">
+                <span class="pub-badge news">⚡ Semaine du 29 juin 2026</span>
+                <time class="pub-date">4 juillet 2026</time>
+                <ul class="news-items">
+                  <li class="news-item">Claude Fable 5 est de retour : les USA lèvent le blocage sur les modèles Anthropic</li>
+                  <li class="news-item">GPT-5.6 reste sous clé : OpenAI le réserve à une vingtaine d'entreprises validées par Washington</li>
+                  <li class="news-item">13% des emplois menacés, 13% en croissance, le match nul qu'OpenAI lui-même publie</li>
+                </ul>
+                <div class="news-focus">Focus : <strong>L'IA et votre emploi : les vrais chiffres pour la France</strong></div>
+              </div>
+            </div>
+
+            <div class="pub-card pub-extra reveal" data-slides='["../assets/posts/news-22juin-1.jpg","../assets/posts/news-22juin-2.jpg"]'>
+              <img class="pub-card-img" src="../assets/posts/news-22juin-1.jpg" alt="News IA, semaine du 22 juin 2026" loading="lazy">
+              <div class="pub-card-body">
+                <span class="pub-badge news">⚡ Semaine du 22 juin 2026</span>
+                <time class="pub-date">27 juin 2026</time>
+                <ul class="news-items">
+                  <li class="news-item">La justice suspend ChatGPT dans une entreprise française : 1 000 € d'astreinte par jour</li>
+                  <li class="news-item">Med-Gemini détecte les cancers avec 11 % de précision en plus qu'un radiologue senior</li>
+                  <li class="news-item">97 % des jeunes connaissent l'IA, contre 51 % des seniors</li>
+                </ul>
+                <div class="news-focus">Focus : <strong>Déployer une IA : ce que la loi impose</strong></div>
+              </div>
+            </div>
+
+            <div class="pub-card pub-extra reveal" data-slides='["../assets/posts/news-15juin-1.jpg","../assets/posts/news-15juin-2.jpg"]'>
+              <img class="pub-card-img" src="../assets/posts/news-15juin-1.jpg" alt="News IA, semaine du 15 juin 2026" loading="lazy">
+              <div class="pub-card-body">
+                <span class="pub-badge news">⚡ Semaine du 15 juin 2026</span>
+                <time class="pub-date">20 juin 2026</time>
+                <ul class="news-items">
+                  <li class="news-item">L'État équipe 1 million de fonctionnaires avec une IA française bâtie sur Mistral</li>
+                  <li class="news-item">Les USA interdisent à Anthropic d'exporter ses modèles les plus puissants à l'étranger</li>
+                  <li class="news-item">13 % des Français demanderaient à une IA pour qui voter à la présidentielle 2027</li>
+                </ul>
+                <div class="news-focus">Focus : <strong>L'IA de l'État : ce que ça change pour vous</strong></div>
+              </div>
+            </div>
+
+            <div class="pub-card pub-extra reveal" data-slides='["../assets/posts/news-08juin-1.jpg","../assets/posts/news-08juin-2.jpg"]'>
+              <img class="pub-card-img" src="../assets/posts/news-08juin-1.jpg" alt="News IA, semaine du 8 juin 2026" loading="lazy">
+              <div class="pub-card-body">
+                <span class="pub-badge news">⚡ Semaine du 8 juin 2026</span>
+                <time class="pub-date">13 juin 2026</time>
+                <ul class="news-items">
+                  <li class="news-item">Apple paie 1 milliard $/an à Google pour faire tourner le nouveau Siri sur l'IA Gemini</li>
+                  <li class="news-item">Dès le 2 août, tout contenu créé par IA devra être signalé comme tel (loi européenne)</li>
+                  <li class="news-item">Dreambeans : une IA qui transforme votre vie en bande dessinée chaque matin</li>
+                </ul>
+                <div class="news-focus">Focus : <strong>Apple et Siri : pourquoi ce virage est historique</strong></div>
+              </div>
+            </div>
+
+            <div class="pub-card text-only pub-extra reveal" data-text="true">
+              <div class="pub-card-body">
+                <span class="pub-badge news">⚡ 5 juin 2026</span>
+                <time class="pub-date">5 juin 2026</time>
+                <ul class="news-items">
+                  <li class="news-item">SoftBank annonce 75 milliards € investis en France pour des data centers IA, le plus grand investissement IA jamais annoncé en Europe</li>
+                  <li class="news-item">Un modèle OpenAI résout un problème de maths posé par Erdős en 1946, non résolu depuis 80 ans, validé par 9 mathématiciens dont un médaillé Fields</li>
+                </ul>
+                <div class="news-focus">Le détail : <strong>Erdős avait promis 500 $ à qui résoudrait son problème. Une IA l'a fait. Mais une IA ne peut pas toucher un chèque.</strong></div>
+              </div>
+            </div>
+
+            <div class="pub-card pub-extra reveal" data-slides='["../assets/posts/news-26mai-1.jpg","../assets/posts/news-26mai-2.jpg"]'>
+              <img class="pub-card-img" src="../assets/posts/news-26mai-1.jpg" alt="News IA, semaine du 26 mai 2026" loading="lazy">
+              <div class="pub-card-body">
+                <span class="pub-badge news">⚡ Semaine du 26 mai 2026</span>
+                <time class="pub-date">30 mai 2026</time>
+                <ul class="news-items">
+                  <li class="news-item">Anthropic (Claude) dépasse OpenAI pour la 1ère fois, valorisation de 965 milliards de dollars</li>
+                  <li class="news-item">OpenAI et Anthropic préparent leur entrée en bourse pour l'automne 2026</li>
+                  <li class="news-item">76 % des Français utilisent l'IA, dont 52 % dans un contexte amoureux</li>
+                </ul>
+                <div class="news-focus">Focus : <strong>Entrer en bourse : qu'est-ce que ça veut dire ?</strong></div>
+              </div>
+            </div>
+
+          </div>
+          <div class="pub-voir-plus">
+            <button class="btn-voir-plus" onclick="toggleExtra('news', this)">Voir plus</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+  <button class="lightbox-close" id="lightbox-close" aria-label="Fermer">✕</button>
+  <div class="lightbox-inner" id="lightbox-inner"></div>
+</div>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <a class="brand" href="/" aria-label="NOVAËN"><img src="../assets/novaen-logo-light.svg" alt="NOVAËN, From Spark To The Star"></a>
+        <p class="tag">Solutions d'intelligence artificielle pour les entreprises B2B.</p>
+      </div>
+      <div class="foot-right">
+        <span class="city">Paris · France</span>
+        <a class="mail" href="mailto:ctn@novaen.fr">ctn@novaen.fr</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 NOVAËN. Tous droits réservés.</span>
+      <span>Intelligence artificielle · Paris</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Curseur
+  if (window.matchMedia('(pointer: fine)').matches) {
+    var dot = document.getElementById('cursor-dot');
+    var ring = document.getElementById('cursor-ring');
+    var mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+    document.addEventListener('mousemove', function(e) { mouseX = e.clientX; mouseY = e.clientY; dot.style.left = mouseX + 'px'; dot.style.top = mouseY + 'px'; });
+    (function animateRing() { ringX += (mouseX - ringX) * 0.13; ringY += (mouseY - ringY) * 0.13; ring.style.left = ringX + 'px'; ring.style.top = ringY + 'px'; requestAnimationFrame(animateRing); })();
+    document.querySelectorAll('a, button').forEach(function(el) {
+      el.addEventListener('mouseenter', function() { dot.classList.add('hover'); ring.classList.add('hover'); });
+      el.addEventListener('mouseleave', function() { dot.classList.remove('hover'); ring.classList.remove('hover'); });
+    });
+  }
+
+  // Lightbox
+  (function() {
+    var lb = document.getElementById('lightbox');
+    var inner = document.getElementById('lightbox-inner');
+    var closeBtn = document.getElementById('lightbox-close');
+    function openLightbox(slides) {
+      inner.innerHTML = slides.map(function(src) { return '<img src="' + src + '" alt="">'; }).join('');
+      lb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() { lb.classList.remove('open'); document.body.style.overflow = ''; }
+    document.querySelectorAll('.pub-card[data-slides]').forEach(function(card) {
+      card.addEventListener('click', function() { openLightbox(JSON.parse(card.dataset.slides)); });
+    });
+    document.querySelectorAll('.pub-card[data-text]').forEach(function(card) {
+      card.addEventListener('click', function() {
+        inner.innerHTML = '<div class="lightbox-text">'
+          + '<h3>🏗️ La France devient un géant mondial de l\'IA</h3>'
+          + '<p>SoftBank vient d\'annoncer 75 milliards d\'euros investis en France pour construire des data centers IA dans les Hauts-de-France. C\'est le plus grand investissement IA jamais annoncé en Europe.</p>'
+          + '<p>Pourquoi la France ? Notre électricité nucléaire, décarbonée à 95 %, est un avantage compétitif énorme pour des infrastructures aussi énergivores. Macron a personnellement bataillé pour convaincre Masayoshi Son, le patron de SoftBank.</p>'
+          + '<span class="lb-arrow">→ Pour les entreprises françaises, c\'est un signal clair : l\'IA va s\'accélérer ici, pas dans 5 ans.</span>'
+          + '<h3>🧮 Une IA résout un problème de maths vieux de 80 ans</h3>'
+          + '<p>En 1946, le mathématicien Paul Erdős pose un problème de géométrie apparemment simple. Les meilleurs cerveaux du monde planèrent dessus pendant 8 décennies. Sans succès.</p>'
+          + '<p>Cette semaine, un modèle OpenAI l\'a résolu seul, sans être spécialisé en maths. 9 mathématiciens ont relu et validé la preuve. L\'un d\'eux, médaillé Fields, a déclaré qu\'il la publierait sans hésiter dans la plus grande revue scientifique du monde.</p>'
+          + '<span class="lb-arrow">→ L\'IA ne se contente plus d\'assister les chercheurs. Elle fait des découvertes que l\'humain n\'avait pas réussi à faire.</span>'
+          + '<div class="lb-detail">✨ <strong>Le détail qui fait sourire :</strong> Erdős avait promis 500 $ à qui résoudrait son problème. Une IA l\'a fait. Mais une IA ne peut pas toucher un chèque.</div>'
+          + '</div>';
+        lb.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+    closeBtn.addEventListener('click', closeLightbox);
+    lb.addEventListener('click', function(e) { if (e.target === lb) closeLightbox(); });
+    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeLightbox(); });
+  })();
+
+  // Voir plus / Voir moins
+  function toggleExtra(panelId, btn) {
+    var grid = document.getElementById('grid-' + panelId);
+    var extras = grid.querySelectorAll('.pub-extra');
+    var expanded = btn.dataset.expanded === 'true';
+    extras.forEach(function(el) { el.style.display = expanded ? 'none' : 'block'; });
+    btn.textContent = expanded ? 'Voir plus' : 'Voir moins';
+    btn.dataset.expanded = expanded ? 'false' : 'true';
+    if (expanded) { document.getElementById('panel-' + panelId).scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  }
+</script>
+</body>
+</html>
