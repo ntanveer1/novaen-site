@@ -140,28 +140,83 @@
   .page-hero h1 .hl { color: var(--cyan-bright); }
   .page-hero p { margin-top: 1rem; color: var(--ink-soft); max-width: 52ch; }
 
-  /* Publications */
-  .publications { padding-block: clamp(2rem, 5vh, 4rem) var(--section-y); }
-  .pub-columns {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start;
+  /* Publications — timeline */
+  .publications { padding-block: clamp(1rem, 3vh, 2rem) var(--section-y); }
+
+  .timeline { position: relative; padding-block: 0.5rem 2rem; }
+
+  @media (min-width: 700px) {
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 50%; top: 0; bottom: 0;
+      width: 1px;
+      transform: translateX(-50%);
+      background: linear-gradient(to bottom, transparent 0%, rgba(37,186,192,0.22) 4%, rgba(37,186,192,0.22) 96%, transparent 100%);
+    }
   }
-  @media (max-width: 900px) { .pub-columns { grid-template-columns: 1fr; gap: 3.5rem; } }
-  .pub-column-title {
-    font-family: var(--font-display); font-size: 1.05rem; font-weight: 600;
-    color: var(--ink); margin: 0 0 1.5rem;
-    padding-bottom: 0.75rem; border-bottom: 1px solid var(--line);
+
+  .tl-item {
+    position: relative;
+    margin-bottom: 4.5rem;
   }
-  .pub-column .pub-grid { grid-template-columns: 1fr; }
-  .pub-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-  @media (max-width: 900px) { .pub-grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 560px) { .pub-grid { grid-template-columns: 1fr; } }
+
+  .tl-type {
+    font-family: var(--font-display);
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 0.7rem;
+  }
+  .tl-type.news { color: #f59e0b; }
+
+  @media (min-width: 700px) {
+    .tl-item { width: calc(50% - 2rem); }
+    .tl-item.tl-left { margin-right: auto; }
+    .tl-item.tl-right { margin-left: auto; }
+
+    .tl-item::after {
+      content: "";
+      position: absolute;
+      top: 0.15rem;
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      z-index: 1;
+    }
+    .tl-item.tl-pedagogie::after {
+      background: var(--cyan);
+      box-shadow: 0 0 8px 3px rgba(37,186,192,0.45);
+    }
+    .tl-item.tl-news::after {
+      background: #f59e0b;
+      box-shadow: 0 0 8px 3px rgba(245,158,11,0.45);
+    }
+    .tl-item.tl-left::after { right: -2rem; transform: translateX(50%); }
+    .tl-item.tl-right::after { left: -2rem; transform: translateX(-50%); }
+  }
+
+  @media (max-width: 699px) {
+    .timeline { border-left: 1px solid rgba(37,186,192,0.22); padding-left: 1.5rem; }
+    .tl-item { margin-bottom: 3rem; }
+    .tl-item::after {
+      content: "";
+      position: absolute;
+      left: -1.75rem;
+      top: 0.15rem;
+      width: 9px; height: 9px;
+      border-radius: 50%;
+    }
+    .tl-item.tl-pedagogie::after { background: var(--cyan); }
+    .tl-item.tl-news::after { background: #f59e0b; }
+  }
+
+  /* Cards */
   .pub-card {
     background: var(--bg-2); border: 1px solid var(--line);
     border-radius: 16px; overflow: hidden; cursor: pointer;
     transition: border-color 0.25s, transform 0.25s;
   }
   .pub-card:hover { border-color: var(--cyan); transform: translateY(-4px); }
-  .pub-card-img { width: 100%; display: block; height: 220px; object-fit: cover; object-position: top; }
+  .pub-card-img { width: 100%; display: block; height: 200px; object-fit: cover; object-position: top; }
   .pub-card-body { padding: 1.25rem 1.25rem 1.5rem; }
   .pub-badge {
     display: inline-block; font-size: 0.63rem; font-weight: 700;
@@ -179,14 +234,6 @@
   .news-focus { margin-top: 0.9rem; padding: 0.5rem 0.75rem; background: rgba(67, 224, 230, 0.05); border-left: 2px solid var(--cyan); border-radius: 0 6px 6px 0; font-size: 0.78rem; color: var(--ink-soft); }
   .news-focus strong { color: var(--cyan-bright); font-weight: 600; }
   .pub-card.text-only .pub-card-body { padding: 1.5rem; }
-  .pub-extra { display: none; }
-  .pub-voir-plus { display: flex; justify-content: center; margin-top: 2rem; }
-  .btn-voir-plus {
-    background: none; border: 1px solid var(--line); color: var(--ink-soft);
-    font-family: var(--font-display); font-size: 0.9rem; font-weight: 500;
-    padding: 0.65rem 2rem; border-radius: 99px; cursor: pointer; transition: border-color 0.2s, color 0.2s;
-  }
-  .btn-voir-plus:hover { border-color: var(--cyan); color: var(--cyan-bright); }
 
   /* Lightbox */
   .lightbox {
@@ -285,211 +332,259 @@
 
   <section class="publications">
     <div class="wrap">
-      <div class="pub-columns">
+      <div class="timeline">
 
-        <!-- PÉDAGOGIE IA -->
-        <div class="pub-column" id="panel-pedagogie">
-          <h3 class="pub-column-title">📚 Pédagogie IA</h3>
-          <div class="pub-grid" id="grid-pedagogie">
-
-            <div class="pub-card reveal" data-slides='["../assets/posts/pedagogie-mardi-grand-pere-IA.jpg"]'>
-              <img class="pub-card-img" src="../assets/posts/pedagogie-mardi-grand-pere-IA.jpg" alt="De la télé à l'IA : une génération qui n'a jamais cessé d'apprendre" loading="lazy">
-              <div class="pub-card-body">
-                <span class="pub-badge">Histoire vraie</span>
-                <time class="pub-date">21 juillet 2026</time>
-                <h3>De la télé à l'IA : une génération qui n'a jamais cessé d'apprendre</h3>
-                <p class="pub-card-desc">De la télé au Minitel, d'Internet au smartphone, puis à l'IA. La vraie compétence, ce n'est pas de tout maîtriser. C'est de ne jamais arrêter d'apprendre.</p>
-              </div>
+        <!-- 1 — 21 juillet 2026 — Pédagogie (LEFT) -->
+        <div class="tl-item tl-left tl-pedagogie">
+          <div class="tl-type">📚 Pédagogie IA</div>
+          <div class="pub-card reveal" data-slides='["../assets/posts/pedagogie-mardi-grand-pere-IA.jpg"]'>
+            <img class="pub-card-img" src="../assets/posts/pedagogie-mardi-grand-pere-IA.jpg" alt="De la télé à l'IA : une génération qui n'a jamais cessé d'apprendre" loading="lazy">
+            <div class="pub-card-body">
+              <span class="pub-badge">Histoire vraie</span>
+              <time class="pub-date">21 juillet 2026</time>
+              <h3>De la télé à l'IA : une génération qui n'a jamais cessé d'apprendre</h3>
+              <p class="pub-card-desc">De la télé au Minitel, d'Internet au smartphone, puis à l'IA. La vraie compétence, ce n'est pas de tout maîtriser. C'est de ne jamais arrêter d'apprendre.</p>
             </div>
-
-            <div class="pub-card reveal" data-slides='["../assets/posts/pedagogie-5-usages-travail.jpg"]'>
-              <img class="pub-card-img" src="../assets/posts/pedagogie-5-usages-travail.jpg" alt="5 façons d'utiliser l'IA au travail dès aujourd'hui" loading="lazy">
-              <div class="pub-card-body">
-                <span class="pub-badge">Guide pratique</span>
-                <time class="pub-date">7 juillet 2026</time>
-                <h3>5 façons d'utiliser l'IA au travail dès aujourd'hui</h3>
-                <p class="pub-card-desc">Rédiger vos mails, résumer une réunion, trouver des idées, traduire un texte pro, préparer un rendez-vous client. Pas besoin d'être expert, juste de commencer.</p>
-              </div>
-            </div>
-
-            <div class="pub-card reveal" data-slides='["../assets/posts/pedagogie-bon-sens.jpg"]'>
-              <img class="pub-card-img" src="../assets/posts/pedagogie-bon-sens.jpg" alt="L'IA a-t-elle du bon sens ?" loading="lazy">
-              <div class="pub-card-body">
-                <span class="pub-badge">Le test qui fait réfléchir</span>
-                <time class="pub-date">30 juin 2026</time>
-                <h3>L'IA a-t-elle du bon sens ?</h3>
-                <p class="pub-card-desc">Une question simple a mis ChatGPT et Copilot en échec, quand Gemini a trouvé la bonne réponse. L'IA suit la logique, pas toujours le bon sens.</p>
-              </div>
-            </div>
-
-            <div class="pub-card reveal" data-slides='["../assets/posts/pedagogie-ia-souveraine.jpg"]'>
-              <img class="pub-card-img" src="../assets/posts/pedagogie-ia-souveraine.jpg" alt="L'IA souveraine, c'est quoi ?" loading="lazy">
-              <div class="pub-card-body">
-                <span class="pub-badge">Pédagogie IA</span>
-                <time class="pub-date">23 juin 2026</time>
-                <h3>L'IA souveraine, c'est quoi ?</h3>
-                <p class="pub-card-desc">Une IA dont les données restent en France ou en Europe. Ce n'est pas du patriotisme : c'est garder le contrôle de vos données d'entreprise.</p>
-              </div>
-            </div>
-
-            <div class="pub-card reveal" data-slides='["../assets/posts/pedagogie-agent-ia.jpg"]'>
-              <img class="pub-card-img" src="../assets/posts/pedagogie-agent-ia.jpg" alt="C'est quoi un agent IA ?" loading="lazy">
-              <div class="pub-card-body">
-                <span class="pub-badge">Pédagogie IA</span>
-                <time class="pub-date">16 juin 2026</time>
-                <h3>C'est quoi un agent IA ?</h3>
-                <p class="pub-card-desc">La différence entre une IA qui répond et un agent qui agit. En 3 temps : vous donnez un objectif, il découpe la mission, il exécute seul.</p>
-              </div>
-            </div>
-
-            <div class="pub-card reveal" data-slides='["../assets/posts/pedagogie-3-erreurs.jpg"]'>
-              <img class="pub-card-img" src="../assets/posts/pedagogie-3-erreurs.jpg" alt="3 erreurs que tout le monde fait avec l'IA" loading="lazy">
-              <div class="pub-card-body">
-                <span class="pub-badge">Erreurs courantes</span>
-                <time class="pub-date">9 juin 2026</time>
-                <h3>3 erreurs que tout le monde fait avec l'IA</h3>
-                <p class="pub-card-desc">Lui faire confiance les yeux fermés, poser des questions de 3 mots, abandonner après la première réponse. Et comment les éviter.</p>
-              </div>
-            </div>
-
-            <div class="pub-card reveal" data-slides='["../assets/posts/pedagogie-emplois.jpg"]'>
-              <img class="pub-card-img" src="../assets/posts/pedagogie-emplois.jpg" alt="L'IA va-t-elle vraiment supprimer des emplois ?" loading="lazy">
-              <div class="pub-card-body">
-                <span class="pub-badge">Prise de position</span>
-                <time class="pub-date">2 juin 2026</time>
-                <h3>L'IA va-t-elle vraiment supprimer des emplois ?</h3>
-                <p class="pub-card-desc">La réponse honnête, ni catastrophiste ni naïve. Ce qui disparaît, ce qui se transforme, ce qui se crée. Le vrai risque : ne pas apprendre à travailler avec l'IA.</p>
-              </div>
-            </div>
-
-            <div class="pub-card reveal" data-slides='["../assets/posts/pedagogie-prompt.jpg"]'>
-              <img class="pub-card-img" src="../assets/posts/pedagogie-prompt.jpg" alt="Le prompt : comment bien parler à une IA ?" loading="lazy">
-              <div class="pub-card-body">
-                <span class="pub-badge">Pédagogie IA</span>
-                <time class="pub-date">26 mai 2026</time>
-                <h3>Le prompt : comment bien parler à une IA ?</h3>
-                <p class="pub-card-desc">5 règles essentielles pour obtenir des résultats utiles de ChatGPT, Gemini ou Claude. Soyez précis, donnez le contexte, précisez la forme, donnez un rôle, itérez.</p>
-              </div>
-            </div>
-
           </div>
         </div>
 
-        <!-- NEWS DE LA SEMAINE -->
-        <div class="pub-column" id="panel-news">
-          <h3 class="pub-column-title">⚡ News de la semaine</h3>
-          <div class="pub-grid" id="grid-news">
-
-            <div class="pub-card reveal" data-slides='["../assets/posts/news-17juillet-1.jpg","../assets/posts/news-17juillet-2.jpg"]'>
-              <img class="pub-card-img" src="../assets/posts/news-17juillet-1.jpg" alt="News IA, semaine du 13 juillet 2026" loading="lazy">
-              <div class="pub-card-body">
-                <span class="pub-badge news">⚡ Semaine du 13 juillet 2026</span>
-                <time class="pub-date">17 juillet 2026</time>
-                <ul class="news-items">
-                  <li class="news-item">Apple attaque OpenAI en justice : plus de 400 anciens salariés d'Apple ont rejoint OpenAI, accusé de débauchage et vol de secrets industriels</li>
-                  <li class="news-item">44% des utilisateurs quotidiens de l'IA constatent un gain de productivité réel, 26% déclarent en perdre (sondage québécois, juillet 2026)</li>
-                  <li class="news-item">41% des posts longs LinkedIn sont écrits par une IA, selon une étude Pangram sur plus d'1 million de posts analysés</li>
-                </ul>
-                <div class="news-focus">Focus : <strong>Pourquoi l'IA vous fait parfois perdre du temps</strong></div>
-              </div>
+        <!-- 2 — 17 juillet 2026 — News (RIGHT) -->
+        <div class="tl-item tl-right tl-news">
+          <div class="tl-type news">⚡ News de la semaine</div>
+          <div class="pub-card reveal" data-slides='["../assets/posts/news-17juillet-1.jpg","../assets/posts/news-17juillet-2.jpg"]'>
+            <img class="pub-card-img" src="../assets/posts/news-17juillet-1.jpg" alt="News IA, semaine du 13 juillet 2026" loading="lazy">
+            <div class="pub-card-body">
+              <span class="pub-badge news">⚡ Semaine du 13 juillet 2026</span>
+              <time class="pub-date">17 juillet 2026</time>
+              <ul class="news-items">
+                <li class="news-item">Apple attaque OpenAI en justice : plus de 400 anciens salariés d'Apple ont rejoint OpenAI, accusé de débauchage et vol de secrets industriels</li>
+                <li class="news-item">44% des utilisateurs quotidiens de l'IA constatent un gain de productivité réel, 26% déclarent en perdre (sondage québécois, juillet 2026)</li>
+                <li class="news-item">41% des posts longs LinkedIn sont écrits par une IA, selon une étude Pangram sur plus d'1 million de posts analysés</li>
+              </ul>
+              <div class="news-focus">Focus : <strong>Pourquoi l'IA vous fait parfois perdre du temps</strong></div>
             </div>
+          </div>
+        </div>
 
-            <div class="pub-card reveal" data-slides='["../assets/posts/news-07juil-1.jpg","../assets/posts/news-07juil-2.jpg"]'>
-              <img class="pub-card-img" src="../assets/posts/news-07juil-1.jpg" alt="News IA, semaine du 6 juillet 2026" loading="lazy">
-              <div class="pub-card-body">
-                <span class="pub-badge news">⚡ Semaine du 6 juillet 2026</span>
-                <time class="pub-date">11 juillet 2026</time>
-                <ul class="news-items">
-                  <li class="news-item">Le 9 juillet, tous les géants de l'IA sortent un nouveau modèle le même jour : GPT-5.6, Grok 4.5, Claude, Gemini</li>
-                  <li class="news-item">La loi européenne sur l'IA entre en vigueur le 2 août : toutes les entreprises concernées par les nouvelles règles de transparence</li>
-                  <li class="news-item">Aux municipales, 1 électeur sur 6 a utilisé l'IA pour voter, plus les ouvriers (17%) que les cadres (13%)</li>
-                </ul>
-                <div class="news-focus">Focus : <strong>La loi IA du 2 août : votre entreprise est-elle prête ?</strong></div>
-              </div>
+        <!-- 3 — 11 juillet 2026 — News (LEFT) -->
+        <div class="tl-item tl-left tl-news">
+          <div class="tl-type news">⚡ News de la semaine</div>
+          <div class="pub-card reveal" data-slides='["../assets/posts/news-07juil-1.jpg","../assets/posts/news-07juil-2.jpg"]'>
+            <img class="pub-card-img" src="../assets/posts/news-07juil-1.jpg" alt="News IA, semaine du 6 juillet 2026" loading="lazy">
+            <div class="pub-card-body">
+              <span class="pub-badge news">⚡ Semaine du 6 juillet 2026</span>
+              <time class="pub-date">11 juillet 2026</time>
+              <ul class="news-items">
+                <li class="news-item">Le 9 juillet, tous les géants de l'IA sortent un nouveau modèle le même jour : GPT-5.6, Grok 4.5, Claude, Gemini</li>
+                <li class="news-item">La loi européenne sur l'IA entre en vigueur le 2 août : toutes les entreprises concernées par les nouvelles règles de transparence</li>
+                <li class="news-item">Aux municipales, 1 électeur sur 6 a utilisé l'IA pour voter, plus les ouvriers (17%) que les cadres (13%)</li>
+              </ul>
+              <div class="news-focus">Focus : <strong>La loi IA du 2 août : votre entreprise est-elle prête ?</strong></div>
             </div>
+          </div>
+        </div>
 
-            <div class="pub-card reveal" data-slides='["../assets/posts/news-29juin-1.jpg","../assets/posts/news-29juin-2.jpg"]'>
-              <img class="pub-card-img" src="../assets/posts/news-29juin-1.jpg" alt="News IA, semaine du 29 juin 2026" loading="lazy">
-              <div class="pub-card-body">
-                <span class="pub-badge news">⚡ Semaine du 29 juin 2026</span>
-                <time class="pub-date">4 juillet 2026</time>
-                <ul class="news-items">
-                  <li class="news-item">Claude Fable 5 est de retour : les USA lèvent le blocage sur les modèles Anthropic</li>
-                  <li class="news-item">GPT-5.6 reste sous clé : OpenAI le réserve à une vingtaine d'entreprises validées par Washington</li>
-                  <li class="news-item">13% des emplois menacés, 13% en croissance, le match nul qu'OpenAI lui-même publie</li>
-                </ul>
-                <div class="news-focus">Focus : <strong>L'IA et votre emploi : les vrais chiffres pour la France</strong></div>
-              </div>
+        <!-- 4 — 7 juillet 2026 — Pédagogie (RIGHT) -->
+        <div class="tl-item tl-right tl-pedagogie">
+          <div class="tl-type">📚 Pédagogie IA</div>
+          <div class="pub-card reveal" data-slides='["../assets/posts/pedagogie-5-usages-travail.jpg"]'>
+            <img class="pub-card-img" src="../assets/posts/pedagogie-5-usages-travail.jpg" alt="5 façons d'utiliser l'IA au travail dès aujourd'hui" loading="lazy">
+            <div class="pub-card-body">
+              <span class="pub-badge">Guide pratique</span>
+              <time class="pub-date">7 juillet 2026</time>
+              <h3>5 façons d'utiliser l'IA au travail dès aujourd'hui</h3>
+              <p class="pub-card-desc">Rédiger vos mails, résumer une réunion, trouver des idées, traduire un texte pro, préparer un rendez-vous client. Pas besoin d'être expert, juste de commencer.</p>
             </div>
+          </div>
+        </div>
 
-            <div class="pub-card reveal" data-slides='["../assets/posts/news-22juin-1.jpg","../assets/posts/news-22juin-2.jpg"]'>
-              <img class="pub-card-img" src="../assets/posts/news-22juin-1.jpg" alt="News IA, semaine du 22 juin 2026" loading="lazy">
-              <div class="pub-card-body">
-                <span class="pub-badge news">⚡ Semaine du 22 juin 2026</span>
-                <time class="pub-date">27 juin 2026</time>
-                <ul class="news-items">
-                  <li class="news-item">La justice suspend ChatGPT dans une entreprise française : 1 000 € d'astreinte par jour</li>
-                  <li class="news-item">Med-Gemini détecte les cancers avec 11 % de précision en plus qu'un radiologue senior</li>
-                  <li class="news-item">97 % des jeunes connaissent l'IA, contre 51 % des seniors</li>
-                </ul>
-                <div class="news-focus">Focus : <strong>Déployer une IA : ce que la loi impose</strong></div>
-              </div>
+        <!-- 5 — 4 juillet 2026 — News (LEFT) -->
+        <div class="tl-item tl-left tl-news">
+          <div class="tl-type news">⚡ News de la semaine</div>
+          <div class="pub-card reveal" data-slides='["../assets/posts/news-29juin-1.jpg","../assets/posts/news-29juin-2.jpg"]'>
+            <img class="pub-card-img" src="../assets/posts/news-29juin-1.jpg" alt="News IA, semaine du 29 juin 2026" loading="lazy">
+            <div class="pub-card-body">
+              <span class="pub-badge news">⚡ Semaine du 29 juin 2026</span>
+              <time class="pub-date">4 juillet 2026</time>
+              <ul class="news-items">
+                <li class="news-item">Claude Fable 5 est de retour : les USA lèvent le blocage sur les modèles Anthropic</li>
+                <li class="news-item">GPT-5.6 reste sous clé : OpenAI le réserve à une vingtaine d'entreprises validées par Washington</li>
+                <li class="news-item">13% des emplois menacés, 13% en croissance, le match nul qu'OpenAI lui-même publie</li>
+              </ul>
+              <div class="news-focus">Focus : <strong>L'IA et votre emploi : les vrais chiffres pour la France</strong></div>
             </div>
+          </div>
+        </div>
 
-            <div class="pub-card reveal" data-slides='["../assets/posts/news-15juin-1.jpg","../assets/posts/news-15juin-2.jpg"]'>
-              <img class="pub-card-img" src="../assets/posts/news-15juin-1.jpg" alt="News IA, semaine du 15 juin 2026" loading="lazy">
-              <div class="pub-card-body">
-                <span class="pub-badge news">⚡ Semaine du 15 juin 2026</span>
-                <time class="pub-date">20 juin 2026</time>
-                <ul class="news-items">
-                  <li class="news-item">L'État équipe 1 million de fonctionnaires avec une IA française bâtie sur Mistral</li>
-                  <li class="news-item">Les USA interdisent à Anthropic d'exporter ses modèles les plus puissants à l'étranger</li>
-                  <li class="news-item">13 % des Français demanderaient à une IA pour qui voter à la présidentielle 2027</li>
-                </ul>
-                <div class="news-focus">Focus : <strong>L'IA de l'État : ce que ça change pour vous</strong></div>
-              </div>
+        <!-- 6 — 30 juin 2026 — Pédagogie (RIGHT) -->
+        <div class="tl-item tl-right tl-pedagogie">
+          <div class="tl-type">📚 Pédagogie IA</div>
+          <div class="pub-card reveal" data-slides='["../assets/posts/pedagogie-bon-sens.jpg"]'>
+            <img class="pub-card-img" src="../assets/posts/pedagogie-bon-sens.jpg" alt="L'IA a-t-elle du bon sens ?" loading="lazy">
+            <div class="pub-card-body">
+              <span class="pub-badge">Le test qui fait réfléchir</span>
+              <time class="pub-date">30 juin 2026</time>
+              <h3>L'IA a-t-elle du bon sens ?</h3>
+              <p class="pub-card-desc">Une question simple a mis ChatGPT et Copilot en échec, quand Gemini a trouvé la bonne réponse. L'IA suit la logique, pas toujours le bon sens.</p>
             </div>
+          </div>
+        </div>
 
-            <div class="pub-card reveal" data-slides='["../assets/posts/news-08juin-1.jpg","../assets/posts/news-08juin-2.jpg"]'>
-              <img class="pub-card-img" src="../assets/posts/news-08juin-1.jpg" alt="News IA, semaine du 8 juin 2026" loading="lazy">
-              <div class="pub-card-body">
-                <span class="pub-badge news">⚡ Semaine du 8 juin 2026</span>
-                <time class="pub-date">13 juin 2026</time>
-                <ul class="news-items">
-                  <li class="news-item">Apple paie 1 milliard $/an à Google pour faire tourner le nouveau Siri sur l'IA Gemini</li>
-                  <li class="news-item">Dès le 2 août, tout contenu créé par IA devra être signalé comme tel (loi européenne)</li>
-                  <li class="news-item">Dreambeans : une IA qui transforme votre vie en bande dessinée chaque matin</li>
-                </ul>
-                <div class="news-focus">Focus : <strong>Apple et Siri : pourquoi ce virage est historique</strong></div>
-              </div>
+        <!-- 7 — 27 juin 2026 — News (LEFT) -->
+        <div class="tl-item tl-left tl-news">
+          <div class="tl-type news">⚡ News de la semaine</div>
+          <div class="pub-card reveal" data-slides='["../assets/posts/news-22juin-1.jpg","../assets/posts/news-22juin-2.jpg"]'>
+            <img class="pub-card-img" src="../assets/posts/news-22juin-1.jpg" alt="News IA, semaine du 22 juin 2026" loading="lazy">
+            <div class="pub-card-body">
+              <span class="pub-badge news">⚡ Semaine du 22 juin 2026</span>
+              <time class="pub-date">27 juin 2026</time>
+              <ul class="news-items">
+                <li class="news-item">La justice suspend ChatGPT dans une entreprise française : 1 000 € d'astreinte par jour</li>
+                <li class="news-item">Med-Gemini détecte les cancers avec 11 % de précision en plus qu'un radiologue senior</li>
+                <li class="news-item">97 % des jeunes connaissent l'IA, contre 51 % des seniors</li>
+              </ul>
+              <div class="news-focus">Focus : <strong>Déployer une IA : ce que la loi impose</strong></div>
             </div>
+          </div>
+        </div>
 
-            <div class="pub-card text-only reveal" data-text="true">
-              <div class="pub-card-body">
-                <span class="pub-badge news">⚡ 5 juin 2026</span>
-                <time class="pub-date">5 juin 2026</time>
-                <ul class="news-items">
-                  <li class="news-item">SoftBank annonce 75 milliards € investis en France pour des data centers IA, le plus grand investissement IA jamais annoncé en Europe</li>
-                  <li class="news-item">Un modèle OpenAI résout un problème de maths posé par Erdős en 1946, non résolu depuis 80 ans, validé par 9 mathématiciens dont un médaillé Fields</li>
-                </ul>
-                <div class="news-focus">Le détail : <strong>Erdős avait promis 500 $ à qui résoudrait son problème. Une IA l'a fait. Mais une IA ne peut pas toucher un chèque.</strong></div>
-              </div>
+        <!-- 8 — 23 juin 2026 — Pédagogie (RIGHT) -->
+        <div class="tl-item tl-right tl-pedagogie">
+          <div class="tl-type">📚 Pédagogie IA</div>
+          <div class="pub-card reveal" data-slides='["../assets/posts/pedagogie-ia-souveraine.jpg"]'>
+            <img class="pub-card-img" src="../assets/posts/pedagogie-ia-souveraine.jpg" alt="L'IA souveraine, c'est quoi ?" loading="lazy">
+            <div class="pub-card-body">
+              <span class="pub-badge">Pédagogie IA</span>
+              <time class="pub-date">23 juin 2026</time>
+              <h3>L'IA souveraine, c'est quoi ?</h3>
+              <p class="pub-card-desc">Une IA dont les données restent en France ou en Europe. Ce n'est pas du patriotisme : c'est garder le contrôle de vos données d'entreprise.</p>
             </div>
+          </div>
+        </div>
 
-            <div class="pub-card reveal" data-slides='["../assets/posts/news-26mai-1.jpg","../assets/posts/news-26mai-2.jpg"]'>
-              <img class="pub-card-img" src="../assets/posts/news-26mai-1.jpg" alt="News IA, semaine du 26 mai 2026" loading="lazy">
-              <div class="pub-card-body">
-                <span class="pub-badge news">⚡ Semaine du 26 mai 2026</span>
-                <time class="pub-date">30 mai 2026</time>
-                <ul class="news-items">
-                  <li class="news-item">Anthropic (Claude) dépasse OpenAI pour la 1ère fois, valorisation de 965 milliards de dollars</li>
-                  <li class="news-item">OpenAI et Anthropic préparent leur entrée en bourse pour l'automne 2026</li>
-                  <li class="news-item">76 % des Français utilisent l'IA, dont 52 % dans un contexte amoureux</li>
-                </ul>
-                <div class="news-focus">Focus : <strong>Entrer en bourse : qu'est-ce que ça veut dire ?</strong></div>
-              </div>
+        <!-- 9 — 20 juin 2026 — News (LEFT) -->
+        <div class="tl-item tl-left tl-news">
+          <div class="tl-type news">⚡ News de la semaine</div>
+          <div class="pub-card reveal" data-slides='["../assets/posts/news-15juin-1.jpg","../assets/posts/news-15juin-2.jpg"]'>
+            <img class="pub-card-img" src="../assets/posts/news-15juin-1.jpg" alt="News IA, semaine du 15 juin 2026" loading="lazy">
+            <div class="pub-card-body">
+              <span class="pub-badge news">⚡ Semaine du 15 juin 2026</span>
+              <time class="pub-date">20 juin 2026</time>
+              <ul class="news-items">
+                <li class="news-item">L'État équipe 1 million de fonctionnaires avec une IA française bâtie sur Mistral</li>
+                <li class="news-item">Les USA interdisent à Anthropic d'exporter ses modèles les plus puissants à l'étranger</li>
+                <li class="news-item">13 % des Français demanderaient à une IA pour qui voter à la présidentielle 2027</li>
+              </ul>
+              <div class="news-focus">Focus : <strong>L'IA de l'État : ce que ça change pour vous</strong></div>
             </div>
+          </div>
+        </div>
 
+        <!-- 10 — 16 juin 2026 — Pédagogie (RIGHT) -->
+        <div class="tl-item tl-right tl-pedagogie">
+          <div class="tl-type">📚 Pédagogie IA</div>
+          <div class="pub-card reveal" data-slides='["../assets/posts/pedagogie-agent-ia.jpg"]'>
+            <img class="pub-card-img" src="../assets/posts/pedagogie-agent-ia.jpg" alt="C'est quoi un agent IA ?" loading="lazy">
+            <div class="pub-card-body">
+              <span class="pub-badge">Pédagogie IA</span>
+              <time class="pub-date">16 juin 2026</time>
+              <h3>C'est quoi un agent IA ?</h3>
+              <p class="pub-card-desc">La différence entre une IA qui répond et un agent qui agit. En 3 temps : vous donnez un objectif, il découpe la mission, il exécute seul.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 11 — 13 juin 2026 — News (LEFT) -->
+        <div class="tl-item tl-left tl-news">
+          <div class="tl-type news">⚡ News de la semaine</div>
+          <div class="pub-card reveal" data-slides='["../assets/posts/news-08juin-1.jpg","../assets/posts/news-08juin-2.jpg"]'>
+            <img class="pub-card-img" src="../assets/posts/news-08juin-1.jpg" alt="News IA, semaine du 8 juin 2026" loading="lazy">
+            <div class="pub-card-body">
+              <span class="pub-badge news">⚡ Semaine du 8 juin 2026</span>
+              <time class="pub-date">13 juin 2026</time>
+              <ul class="news-items">
+                <li class="news-item">Apple paie 1 milliard $/an à Google pour faire tourner le nouveau Siri sur l'IA Gemini</li>
+                <li class="news-item">Dès le 2 août, tout contenu créé par IA devra être signalé comme tel (loi européenne)</li>
+                <li class="news-item">Dreambeans : une IA qui transforme votre vie en bande dessinée chaque matin</li>
+              </ul>
+              <div class="news-focus">Focus : <strong>Apple et Siri : pourquoi ce virage est historique</strong></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 12 — 9 juin 2026 — Pédagogie (RIGHT) -->
+        <div class="tl-item tl-right tl-pedagogie">
+          <div class="tl-type">📚 Pédagogie IA</div>
+          <div class="pub-card reveal" data-slides='["../assets/posts/pedagogie-3-erreurs.jpg"]'>
+            <img class="pub-card-img" src="../assets/posts/pedagogie-3-erreurs.jpg" alt="3 erreurs que tout le monde fait avec l'IA" loading="lazy">
+            <div class="pub-card-body">
+              <span class="pub-badge">Erreurs courantes</span>
+              <time class="pub-date">9 juin 2026</time>
+              <h3>3 erreurs que tout le monde fait avec l'IA</h3>
+              <p class="pub-card-desc">Lui faire confiance les yeux fermés, poser des questions de 3 mots, abandonner après la première réponse. Et comment les éviter.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 13 — 5 juin 2026 — News text-only (LEFT) -->
+        <div class="tl-item tl-left tl-news">
+          <div class="tl-type news">⚡ News de la semaine</div>
+          <div class="pub-card text-only reveal" data-text="true">
+            <div class="pub-card-body">
+              <span class="pub-badge news">⚡ 5 juin 2026</span>
+              <time class="pub-date">5 juin 2026</time>
+              <ul class="news-items">
+                <li class="news-item">SoftBank annonce 75 milliards € investis en France pour des data centers IA, le plus grand investissement IA jamais annoncé en Europe</li>
+                <li class="news-item">Un modèle OpenAI résout un problème de maths posé par Erdős en 1946, non résolu depuis 80 ans, validé par 9 mathématiciens dont un médaillé Fields</li>
+              </ul>
+              <div class="news-focus">Le détail : <strong>Erdős avait promis 500 $ à qui résoudrait son problème. Une IA l'a fait. Mais une IA ne peut pas toucher un chèque.</strong></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 14 — 2 juin 2026 — Pédagogie (RIGHT) -->
+        <div class="tl-item tl-right tl-pedagogie">
+          <div class="tl-type">📚 Pédagogie IA</div>
+          <div class="pub-card reveal" data-slides='["../assets/posts/pedagogie-emplois.jpg"]'>
+            <img class="pub-card-img" src="../assets/posts/pedagogie-emplois.jpg" alt="L'IA va-t-elle vraiment supprimer des emplois ?" loading="lazy">
+            <div class="pub-card-body">
+              <span class="pub-badge">Prise de position</span>
+              <time class="pub-date">2 juin 2026</time>
+              <h3>L'IA va-t-elle vraiment supprimer des emplois ?</h3>
+              <p class="pub-card-desc">La réponse honnête, ni catastrophiste ni naïve. Ce qui disparaît, ce qui se transforme, ce qui se crée. Le vrai risque : ne pas apprendre à travailler avec l'IA.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 15 — 30 mai 2026 — News (LEFT) -->
+        <div class="tl-item tl-left tl-news">
+          <div class="tl-type news">⚡ News de la semaine</div>
+          <div class="pub-card reveal" data-slides='["../assets/posts/news-26mai-1.jpg","../assets/posts/news-26mai-2.jpg"]'>
+            <img class="pub-card-img" src="../assets/posts/news-26mai-1.jpg" alt="News IA, semaine du 26 mai 2026" loading="lazy">
+            <div class="pub-card-body">
+              <span class="pub-badge news">⚡ Semaine du 26 mai 2026</span>
+              <time class="pub-date">30 mai 2026</time>
+              <ul class="news-items">
+                <li class="news-item">Anthropic (Claude) dépasse OpenAI pour la 1ère fois, valorisation de 965 milliards de dollars</li>
+                <li class="news-item">OpenAI et Anthropic préparent leur entrée en bourse pour l'automne 2026</li>
+                <li class="news-item">76 % des Français utilisent l'IA, dont 52 % dans un contexte amoureux</li>
+              </ul>
+              <div class="news-focus">Focus : <strong>Entrer en bourse : qu'est-ce que ça veut dire ?</strong></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 16 — 26 mai 2026 — Pédagogie (RIGHT) -->
+        <div class="tl-item tl-right tl-pedagogie">
+          <div class="tl-type">📚 Pédagogie IA</div>
+          <div class="pub-card reveal" data-slides='["../assets/posts/pedagogie-prompt.jpg"]'>
+            <img class="pub-card-img" src="../assets/posts/pedagogie-prompt.jpg" alt="Le prompt : comment bien parler à une IA ?" loading="lazy">
+            <div class="pub-card-body">
+              <span class="pub-badge">Pédagogie IA</span>
+              <time class="pub-date">26 mai 2026</time>
+              <h3>Le prompt : comment bien parler à une IA ?</h3>
+              <p class="pub-card-desc">5 règles essentielles pour obtenir des résultats utiles de ChatGPT, Gemini ou Claude. Soyez précis, donnez le contexte, précisez la forme, donnez un rôle, itérez.</p>
+            </div>
           </div>
         </div>
 
@@ -572,17 +667,6 @@
     lb.addEventListener('click', function(e) { if (e.target === lb) closeLightbox(); });
     document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeLightbox(); });
   })();
-
-  // Voir plus / Voir moins
-  function toggleExtra(panelId, btn) {
-    var grid = document.getElementById('grid-' + panelId);
-    var extras = grid.querySelectorAll('.pub-extra');
-    var expanded = btn.dataset.expanded === 'true';
-    extras.forEach(function(el) { el.style.display = expanded ? 'none' : 'block'; });
-    btn.textContent = expanded ? 'Voir plus' : 'Voir moins';
-    btn.dataset.expanded = expanded ? 'false' : 'true';
-    if (expanded) { document.getElementById('panel-' + panelId).scrollIntoView({ behavior: 'smooth', block: 'start' }); }
-  }
 </script>
 </body>
 </html>
