@@ -194,8 +194,8 @@
     pointer-events: none;
     transition: opacity 0.2s ease, transform 0.2s ease;
   }
-  .tl-item:hover .tl-dot { transform: scale(1.45); }
-  .tl-item:hover .tl-dot-date { opacity: 1; }
+  .tl-item.visible .tl-dot { transform: scale(1.45); }
+  .tl-item.visible .tl-dot-date { opacity: 1; }
 
   @media (min-width: 700px) {
     .tl-item { width: calc(50% - 2rem); }
@@ -211,8 +211,8 @@
       right: calc(100% + 0.65rem);
       transform: translateY(-50%) translateX(5px);
     }
-    .tl-item.tl-left:hover .tl-dot-date { transform: translateY(-50%) translateX(0); }
-    .tl-item.tl-right:hover .tl-dot-date { transform: translateY(-50%) translateX(0); }
+    .tl-item.tl-left.visible .tl-dot-date { transform: translateY(-50%) translateX(0); }
+    .tl-item.tl-right.visible .tl-dot-date { transform: translateY(-50%) translateX(0); }
   }
 
   @media (max-width: 699px) {
@@ -632,7 +632,7 @@
 </footer>
 
 <script>
-  // Dots timeline avec date au survol
+  // Dots timeline avec date au scroll
   document.querySelectorAll('.tl-item').forEach(function(item) {
     var timeEl = item.querySelector('time.pub-date');
     var dateText = timeEl ? timeEl.textContent.trim() : '';
@@ -648,6 +648,15 @@
       wrap.appendChild(label);
     }
     item.appendChild(wrap);
+  });
+
+  var tlObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      entry.target.classList.toggle('visible', entry.isIntersecting);
+    });
+  }, { threshold: 0.2 });
+  document.querySelectorAll('.tl-item').forEach(function(item) {
+    tlObserver.observe(item);
   });
 
   // Curseur
