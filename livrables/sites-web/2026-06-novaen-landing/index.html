@@ -489,6 +489,9 @@
     display: flex; flex-wrap: wrap; gap: 0.6rem 1.5rem; justify-content: space-between;
     color: var(--ink-mute); font-size: 0.85rem;
   }
+  .foot-bottom a { color: var(--ink-mute); transition: color 0.2s; }
+  .foot-bottom a:hover { color: var(--cyan-bright); }
+  .foot-legal { display: flex; gap: 1.5rem; flex-wrap: wrap; }
 
   /* Contact form */
   .form-contact {
@@ -1037,7 +1040,11 @@
     </div>
     <div class="foot-bottom">
       <span>© 2026 NOVAËN. Tous droits réservés.</span>
-      <span>Intelligence artificielle · Paris</span>
+      <div class="foot-legal">
+        <a href="/mentions-legales/">Mentions légales</a>
+        <a href="/politique-de-confidentialite/">Confidentialité</a>
+        <a href="/cgu/">CGU</a>
+      </div>
     </div>
   </div>
 </footer>
